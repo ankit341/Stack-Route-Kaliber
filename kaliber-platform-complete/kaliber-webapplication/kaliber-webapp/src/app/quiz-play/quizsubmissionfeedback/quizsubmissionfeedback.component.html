@@ -1,0 +1,140 @@
+<div>
+    <mat-toolbar style="justify-content: center">Quiz Feedback</mat-toolbar>
+</div>
+<div class="spinner" *ngIf="loaded">
+    <mat-spinner [diameter]="50"></mat-spinner>
+</div>
+<div *ngIf="loaded === false" fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="70%" fxLayout.xs="column">
+        <div fxLayoutAlign="center">
+            <div *ngIf="congratulations">
+                <h3>Congratulations on doing well, you got {{quizsubfeedback.correctlyAnsweredQuestions}} correct out of {{quizsubfeedback.totalQuestions}}
+                </h3>
+            </div>
+            <div *ngIf="good">
+                <h3>Good, you got {{quizsubfeedback.correctlyAnsweredQuestions}} correct out of {{quizsubfeedback.totalQuestions}}
+                </h3>
+            </div>
+            <div *ngIf="improve">
+                <h3>Too bad, you only got {{quizsubfeedback.correctlyAnsweredQuestions}} correct out of {{quizsubfeedback.totalQuestions}}, please improve</h3>
+            </div>
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-between center">
+            <div fxFlex="50%" fxLayoutAlign="start center">
+                <mat-card style="min-width: 70%">
+                    <div class="hd" fxLayout="column" fxLayoutAlign="center stretch">
+                        <mat-card-header>
+                            <mat-card-title>Total = <strong>{{quizsubfeedback.totalPointsScored}}</strong>
+                            </mat-card-title>
+                        </mat-card-header>
+                    </div>
+                    <mat-card-content>
+                        <p>Correctly Answered = <strong>{{allCorrect}}</strong></p>
+                        <p>Bonus = <strong>{{bonus}}</strong></p>
+                        <p>Penalty = <strong><span *ngIf="penalty > 0">-</span>{{penalty}}</strong></p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div fxFlex="auto" fxLayoutAlign="center center">
+                <circle-progress [percent]="total" radius="85" outerStrokeWidth="10" innerStrokeWidth="3" outerStrokeColor="#03a9f4" innerStrokeColor="#03a9f4" animation="true" animationDuration="300">
+                </circle-progress>
+            </div>
+        </div>
+        <div>
+            <p>Your knowledge on all concepts is <strong>{{showMessage}}</strong></p>
+            <div *ngIf="counter>=1">
+                <p>Concepts of wrongly answered questions</p>
+            </div>
+            <div *ngIf="dataSource.length!==0" fxLayout="row wrap" fxLayoutGap="0.2em">
+                <mat-chip-list *ngFor="let conceptObj of dataSource" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.2em">
+                    <div *ngIf="!conceptObj.correct && conceptObj.userAnswer !==null || conceptObj.skipped===true" fxLayout="row">
+                        <mat-chip *ngFor="let concept of conceptObj.concepts.name">
+                            {{concept}}
+                        </mat-chip>
+                    </div>
+                </mat-chip-list>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
+            <mat-expansion-panel class="expansionTable" fxFlex="auto">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>Click here to see your level of understanding in a particular concept
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="mat-table-data">
+                    <table mat-table [dataSource]="dataSource1" style="text-align: center">
+                        <ng-container matColumnDef="concept">
+                            <th mat-header-cell *matHeaderCellDef style="text-align: left; width: 1px"> Concept </th>
+                            <td mat-cell *matCellDef="let element" style="text-align: left;">
+                                {{element.concepts.name}}
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="remember">
+                            <th mat-header-cell *matHeaderCellDef> Remember </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'remember' && element.correct" style="color: green">done
+                                </mat-icon>
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'remember' && !element.correct" style="color: red">highlight_off</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="understand">
+                            <th mat-header-cell *matHeaderCellDef> Understand </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'understand' && element.correct" style="color: green">done
+                                </mat-icon>
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'understand' && !element.correct" style="color: red">highlight_off</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="apply">
+                            <th mat-header-cell *matHeaderCellDef> Apply </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'apply' && element.correct" style="color: green">done
+                                </mat-icon>
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'apply' && !element.correct" style="color: red">highlight_off</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="analyze">
+                            <th mat-header-cell *matHeaderCellDef> Analyze </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'analyze' && element.correct" style="color: green">done
+                                </mat-icon>
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'analyze' && !element.correct" style="color: red">highlight_off</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="evaluate">
+                            <th mat-header-cell *matHeaderCellDef> Evaluate </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'evaluate' && element.correct" style="color: green">done
+                                </mat-icon>
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'evaluate' && !element.correct" style="color: red">highlight_off</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="create">
+                            <th mat-header-cell *matHeaderCellDef> Create </th>
+                            <td mat-cell *matCellDef="let element">
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'create' && element.correct" style="color: green">done
+                                </mat-icon>
+                                <mat-icon *ngIf="(element.concepts.taxonomy | lowercase) == 'create' && !element.correct" style="color: red">highlight_off</mat-icon>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+            </mat-expansion-panel>
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
+            <p>Attempted Questions</p>
+        </div>
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="0.5%" fxLayoutAlign="center">
+            <div fxFlex="auto" class="question">
+                <app-quizfeedbackquestioncard [quesData]="quizsubQuestion" class="ques"></app-quizfeedbackquestioncard>
+            </div>
+        </div>
+        <div class="btn" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button routerLink="/dashboard" routerLinkActive="active" color="primary">Back to
+                    dashboard</button>
+        </div>
+    </div>
+</div>

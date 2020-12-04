@@ -1,0 +1,112 @@
+<div fxLayout="row" fxLayoutGap="20%" fxLayoutAlign="space-between center">
+    <form [formGroup]="searchBar" class="formSearch">
+        <mat-form-field formControlName="search" class="searchForm">
+            <input matInput type="search" placeholder="search here" class="search-input">
+        </mat-form-field>
+        <mat-icon matPrefix>search</mat-icon>
+
+    </form>
+    <button mat-flat-button matTooltip="Author Question" color="primary" (click)="AuthorQuestion()">Add
+    </button>
+</div>
+<div class="spinner" *ngIf="loaded==false">
+    <mat-spinner [diameter]="50"></mat-spinner>
+</div>
+<div *ngIf="loaded==true">
+    <h4 align="center">Select Questions</h4>
+    <div class="scrollWrapper">
+        <div class="scrollContent">
+            <div class="modal-body" id="scroller" ngxInfiniteScroller strategy="scrollingToBoth" infinite-scroll [infiniteScrollDistance]="modalScrollDistance" [infiniteScrollThrottle]="modalScrollThrottle" [scrollWindow]="false" (scrolled)="onModalScrollDown()">
+
+                <div class="question-panel" *ngFor="let questionObj of questionArr; let i=index">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header collapsedHeight="80px" expandedHeight="30px">
+                                <mat-panel-title class="panelTitle">
+                                    <div fxLayout="row" fxLayoutAlign="space-between" style="max-height: 53px; text-overflow: ellipsis">
+                                        <mat-checkbox [checked]="checked" (change)="onChange($event,questionObj,i)" class="checkbox">
+                                        </mat-checkbox>
+                                        {{questionObj.questionTitle}}
+                                    </div>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-checkbox [checked]="checked" (change)="onChange($event,questionObj,i)" class="checkbox">
+                            </mat-checkbox>
+                            {{questionObj.questionTitle}}
+
+
+                            <div *ngIf="questionObj.questionType=='MCQ'" style="
+                            margin-left: 3em;
+                            margin-bottom: 12px;">
+                                <span class="content">
+                                <markdown [data]="questionObj.questionContent"></markdown>
+                            </span>
+                                <div *ngFor="let i of questionObj.answerOptions" style="
+                                margin-bottom: 8px;
+                                margin-top: 8px;">
+                                    <div *ngIf="i.optionContent==questionObj.answerKeys[0]; else elseblock">
+                                        <mat-radio-group>
+                                            <mat-radio-button [checked]="true" (click)="my()">{{i.optionContent}}
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                    <ng-template #elseblock>
+                                        <mat-radio-button (click)="my()">{{i.optionContent}}</mat-radio-button>
+                                    </ng-template>
+                                </div>
+                            </div>
+
+                            <div *ngIf="questionObj.questionType=='MMCQ'" style="
+                            margin-left: 3em;
+                            margin-bottom: 12px;">
+                                <span class="content">
+                                <markdown [data]="questionObj.questionContent"></markdown>
+                            </span>
+
+                                <div *ngFor="let i of questionObj.answerOptions" style="
+                                margin-bottom: 8px;
+                                margin-top: 8px;">
+                                    <div *ngIf="i.checked==true; else elseblock">
+                                        <mat-checkbox [checked]="true" (click)="my()">{{i.optionContent}}
+                                        </mat-checkbox>
+                                    </div>
+                                    <ng-template #elseblock>
+                                        <mat-checkbox (click)="my()">{{i.optionContent}}</mat-checkbox>
+                                    </ng-template>
+                                </div>
+                            </div>
+
+
+                            <div fxLayout="row" fxLayoutGap="15px" class="card-icons" style="margin-left:3em;">
+                                <div fxLayout="row" *ngIf="questionObj.concepts!=null">
+                                    <div fxLayout="row" *ngFor="let concept of questionObj.concepts.name">
+                                        <mat-chip-list>
+                                            <mat-chip>{{concept}}</mat-chip>
+                                        </mat-chip-list>
+                                    </div>
+                                </div>
+
+                                <div fxLayout="row">
+                                    <mat-icon matTooltip="Timer">query_builder</mat-icon>
+                                    <div class="icon-space">{{questionObj.maxDurationMins}} mins </div>
+                                </div>
+                                <div fxLayout="row">
+                                    <mat-icon matTooltip="marks">emoji_events</mat-icon>
+                                    <div class="icon-space"> {{questionObj.maxScore}} marks</div>
+                                </div>
+
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="create-question-button" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="4.5em">
+
+        <button mat-raised-button class="mat-button" (click)="Close()">Cancel</button>
+        <button mat-raised-button color="primary" class="mat-button" (click)="Save()">Save</button>
+    </div>
+</div>

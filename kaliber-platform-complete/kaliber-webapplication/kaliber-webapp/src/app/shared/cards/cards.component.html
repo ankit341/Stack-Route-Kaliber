@@ -1,0 +1,139 @@
+<div *ngIf="quiz!=null">
+  <mat-card class="quiz-card">
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between" class="header-color">
+
+      <mat-card-title matTooltip="Quiz Title">{{ quiz.title | uppercase }} </mat-card-title>
+      <mat-card-subtitle matTooltip="Quiz code">{{quiz.quizCode}}, by {{quiz.name}} {{quiz.createDate}}
+      </mat-card-subtitle>
+      <!-- <mat-card-subtitle> By {{quiz.name | titlecase}} {{quiz.createDate}}</mat-card-subtitle> -->
+      <div style="margin-right: 25px;">
+        <button mat-icon-button (click)="addToFavourite(quiz.quizCode)">
+          <mat-icon class="fav-icon" *ngIf="fav==false" matTooltip="Click to bookmark">favorite_border</mat-icon>
+          <mat-icon class="fav-icon" *ngIf="fav==true" matTooltip="Click to bookmark" style="color: red">favorite
+          </mat-icon>
+        </button>
+
+      </div>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content class="card-content">
+      <div fxLayout="row" fxLayoutAlign="space-between start" class="subject-icon">
+        <div style="word-break: break-all" class="description-view"> {{quiz.description}} </div>
+        <div *ngIf="quiz.statusvalue=='OPEN'" style="margin-right: 20px">
+          <button mat-icon-button matTooltip="Click to play" color="primary" (click)="onSelect()">
+            <mat-icon style="font-size: 60px; margin-bottom: 10px">play_circle_filled</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="card-icons">
+        <div class="icon-flex">
+          <mat-icon class="nav-icon" matTooltip="Timer">query_builder</mat-icon>
+          <div class="icon-space">{{quiz.maxDurationMinutes}} min </div>
+        </div>
+        <div class="icon-flex">
+          <mat-icon class="nav-icon" matTooltip="{{quiz.maxScore}} points">emoji_events</mat-icon>
+          <div class="icon-space"> {{quiz.maxScore}} points</div>
+        </div>
+      </div>
+      <!-- for dispalaying concepts.. -->
+      <mat-chip-list>
+        <div *ngIf="quiz.concepts!=null" fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <mat-chip *ngFor="let concept of  firstThreeConcepts" class="subject-chip">{{concept | titlecase}}
+          </mat-chip>
+        </div>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <!-- for displaying avatars-->
+    <mat-card-actions style="padding-bottom: 10px;" fxLayout="row" fxLayoutAlign="space-between center"
+      class="card-content">
+      <div *ngIf="componentName=='dashboard'">
+        <div matTooltip="People who attempted quiz" class="avatar-icons" *ngIf="quiz.arrayOfImageUrls !=null">
+          <div *ngIf="quiz.arrayOfImageUrls.length >3 ; else elseBlock" class="avatar-icon">
+            <span class="avatar-i" *ngFor="let avatarUrl of quiz.firstThreeAvatarIcon">
+              <img src="{{avatarUrl}}">
+            </span>
+            <span class="avatar-count" *ngIf="quiz.arrayOfImageUrls.length > 3">
+              + {{quiz.arrayOfImageUrls.length - 3 }} more
+            </span>
+          </div>
+          <ng-template #elseBlock>
+            <span class="avatar-i" *ngFor="let avatarUrl of quiz.arrayOfImageUrls">
+              <img src="{{avatarUrl}}">
+            </span>
+          </ng-template>
+        </div>
+      </div>
+
+
+
+      <div *ngIf="componentName!='dashboard'" matTooltip="People who attempted quiz" class="avatar-icons">
+        <div matTooltip="People who attempted quiz" class="avatar-icons1" *ngIf="quiz.concepts!=null">
+          <div *ngIf="quiz.concepts.length>3 ; else elseBlock" class="avatar-icon">
+            <span class="avatar-i" *ngFor="let concept of firstThreeAvatarIcon">
+              <img src="https://iptc.org/wp-content/uploads/2018/05/avatar-anonymous-300x300.png">
+            </span>
+          </div>
+          <ng-template #elseBlock>
+            <span class="avatar-i" *ngFor="let concept of quiz.concepts">
+              <img src="https://iptc.org/wp-content/uploads/2018/05/avatar-anonymous-300x300.png">
+            </span>
+          </ng-template>
+        </div>
+      </div>
+
+
+      <div>
+        <button mat-icon-button (click)="displayLeaderboard()">
+          <mat-icon class="nav-icon" matTooltip="View LeaderBoard">
+            <span class="iconify" data-icon="mdi-podium" data-inline="false"></span>
+          </mat-icon>
+        </button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon class="nav-icon">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button (click)="followUser(quiz.createdBy)" *ngIf="componentName=='dashboard'" mat-menu-item>
+            <mat-icon>person_add</mat-icon>
+            <span>Follow {{quiz.createdBy}}</span>
+          </button>
+          <button (click)="followTopics(quiz.subject)" *ngIf="componentName=='dashboard'" mat-menu-item>
+            <mat-icon>school</mat-icon>
+            <span>Follow {{quiz.subject}}</span>
+          </button>
+          <button (click)="reportQuiz(quiz.quizCode)" *ngIf="componentName=='dashboard'||componentName=='takenQuizzes'"
+            mat-menu-item>
+            <mat-icon><i class="material-icons">report</i></mat-icon>
+            <span>Report quiz</span>
+          </button>
+          <button (click)="onInvite(quiz)" *ngIf="componentName=='createdQuizzes'" mat-menu-item>
+            <mat-icon>share</mat-icon>
+            <span>Invite</span>
+          </button>
+          <button (click)="onChallenge(quiz)" *ngIf="componentName=='takenQuizzes'" mat-menu-item>
+            <mat-icon>send</mat-icon>
+            <span>Challenge</span>
+          </button>
+          <button (click)="getReportCount(quiz.quizCode)" *ngIf="componentName=='adminQuizBank'" mat-menu-item>
+            <mat-icon>info</mat-icon>
+            <span>Report count : {{quiz.reportQuiz.length}}</span>
+          </button>
+          <button (click)="onEditQuiz(quiz.quizCode)" *ngIf="componentName=='adminQuizBank'" mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit Quiz</span>
+          </button>
+          <button (click)="onDelete(quiz)" *ngIf="componentName=='adminQuizBank'" mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>Archive Quiz</span>
+          </button>
+          <button routerLink="/quizSubmission/{{quiz.submissionId}}" routerLinkActive="active"
+            *ngIf="componentName=='takenQuizzes'" mat-menu-item>
+            <mat-icon>feedback</mat-icon>
+            <span>FeedBack</span>
+          </button>
+        </mat-menu>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+</div>

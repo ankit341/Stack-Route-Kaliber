@@ -1,0 +1,9 @@
+.feature-title {
+  font-weight: bold;
+  margin: 5px;
+  text-transform: capitalize;
+}
+
+.feature-content {
+  margin-left: 15px;
+}

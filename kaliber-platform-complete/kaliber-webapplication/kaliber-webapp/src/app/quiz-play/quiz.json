@@ -1,0 +1,16 @@
+{
+  "quiz": [
+  {
+    "id": 1,
+    "quizCode": "java001 ",
+    "quizName": "Java Xpress ",
+    "organisationName": "ITC ",
+    "domain": "Java ",
+    "maxDurationMinutes": 90,
+    "sections": [
+      {
+        "sectionTitle": "Java"
+      }
+    ]
+  }]
+}

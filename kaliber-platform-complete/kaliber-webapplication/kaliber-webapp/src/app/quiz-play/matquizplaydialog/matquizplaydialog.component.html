@@ -1,0 +1,14 @@
+<div>
+    <div class="content-container">
+
+        <span class="content-span full-width">{{data.message}}</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+        <div>
+            <button mat-flat-button id="no-button" class="nobutton" [mat-dialog-close]="false">NO</button>
+        </div>
+        <div>
+            <button mat-flat-button color="primary" (click)="lobbyfunction()" id="yes-button" class="yesbutton" [mat-dialog-close]="true">YES</button>
+        </div>
+    </div>
+</div>

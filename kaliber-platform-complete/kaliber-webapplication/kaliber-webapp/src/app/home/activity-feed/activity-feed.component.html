@@ -1,0 +1,55 @@
+<div>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="panelTitle">My Challenges
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let i of Challenges">
+
+                <div *ngIf="i.typeValue=='CHALLENGE'" fxLayout="column" fxLayoutAlign="space-between" style="margin-bottom: 1em">
+                    {{i.challengedBy}} challenges {{i.challengedTo}} to take {{i.quizCode}} quiz
+                    <div fxLayout="column" fxLayoutAlign="space-between end" style="margin-top: 1em">
+                        <!-- <button mat-stroked-button (click)="onDecline(i,'CHALLENGE')">Decline</button> -->
+                        <button mat-stroked-button (click)="play(i.quizCode)">Accept</button>
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+
+            </div>
+        </mat-expansion-panel>
+
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="panelTitle">My Invites
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let k of Challenges;let l=index">
+
+                <div *ngIf="k.typeValue=='INVITE'" fxLayout="column" fxLayoutAlign="space-between" style="margin-bottom: 1em">
+                    {{k.challengedBy}} Invited {{k.challengedTo}} to play {{k.quizCode}} quiz
+                    <div fxLayout="column" fxLayoutAlign="space-between end" style="margin-top: 0.5em">
+                        <button mat-stroked-button (click)="play(k.quizCode)">Accept</button>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+
+            </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="panelTitle">Peer Activities
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let j of Following">
+
+                <div *ngIf="j.typeValue=='CHALLENGE'" fxLayout="row" fxLayoutAlign="space-between" style="margin-bottom: 1em">
+                    {{j.challengedBy}} challenges {{j.challengedTo}} to take {{j.quizCode}} quiz
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

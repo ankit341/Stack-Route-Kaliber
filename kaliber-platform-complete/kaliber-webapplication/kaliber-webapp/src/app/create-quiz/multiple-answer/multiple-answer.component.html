@@ -1,0 +1,162 @@
+<p class="error"> {{errorMsg}}</p>
+
+<div class="cards" fxLayoutGap="40px" style="margin: 30px;">
+
+
+    <mat-card class="example-card" padding="5px" *ngFor="let i of addcard" padding="30px">
+
+
+        <form [formGroup]="i.addQuestion" class="form-app">
+            <!-- <div fxLayout="row" fxLayoutAlign="end">
+                <mat-icon (click)="clearcard()">clear</mat-icon>
+            </div>
+             <mat-form-field matInput hintLabel="Max 200 characters">
+                <input matInput #input maxlength="200" placeholder="Question Title"ormControlName="questionTitle">
+                <mat-hint align="end">{{input.value?.length || 0}}/200</mat-hint>
+            </mat-form-field>-->
+            <div fxLayout="column wrap" fxLayoutAlign="left left" fxLayoutGap="30px">
+
+                <mat-form-field matInput hintLabel="fill the question title">
+                    <input matInput #input maxlength="200" placeholder="Question Title" formControlName="questionTitle">
+                    <mat-hint align="end">{{input.value?.length || 0}}/200</mat-hint>
+                </mat-form-field>
+
+            </div>
+            <div fxLayoutAlign="space-between center" fxLayout="row wrap">
+
+                <mat-form-field class="example-chip-list" style="width: 40em;">
+                    <mat-chip-list #chipList aria-label="Fruit selection">
+                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)">
+                            {{fruit}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Add concepts" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" formControlName="conname">
+                    </mat-chip-list>
+                </mat-form-field>
+                <mat-form-field class="fields">
+                    <mat-label>Taxonomy</mat-label>
+                    <mat-select formControlName="contaxonomy">
+                        <mat-option *ngFor="let unit of taxonom " [value]="unit.value">
+
+                            {{unit.value}}
+
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+            </div>
+
+
+            <mat-tab-group class="mark">
+                <mat-tab label=Write>
+                    <mat-form-field class="example-full-width">
+
+
+                        <textarea matInput #input placeholder="Question Content [Mark-down Supported]" class="variable-textarea" formControlName="questionContent" [(ngModel)]="markdown"></textarea>
+                    </mat-form-field>
+                </mat-tab>
+                <mat-tab label="Preview">
+                    <markdown class="variable-binding" [(data)]="markdown"></markdown>
+
+                </mat-tab>
+
+            </mat-tab-group>
+            <div>
+
+                <!--<button class="menu" mat-button [matMenuTriggerFor]="menu"> Select Question Type</button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="toggleId(i)">MCQ</button>
+                    <button mat-menu-item (click)="shortans(i)">Descriptive</button>
+                </mat-menu>-->
+            </div>
+
+
+
+
+            <!-- <div *ngFor="let count of i.optionCount" fxLayout="column" fxLayoutAlign="left" fxLayoutGap="30px">
+                    <mat-radio-button class="example-margin" >
+                        <input matInput placeholder="OPTION" class="placeholder" 
+                          formControlName="content">
+                      </mat-radio-button>
+                </div> -->
+            <h4 style="margin-top:1em ">Please select answerkey</h4>
+            <div formArrayName="answerOptions" *ngFor="let creds of i.addQuestion.get('answerOptions').controls; let j = index">
+                <div [formGroupName]="j">
+                    <!-- <div fxLayoutAlign="start center" fxLayout="row wrap" > -->
+                    <div class="check" fxLayout="row wrap" fxLayoutGap="15px">
+                        <div class="option-bttn">
+                            <mat-checkbox [checked]="checked" (change)="onChange($event,i,j)"></mat-checkbox>
+
+
+
+
+
+                        </div>
+                        <div>
+                            <mat-form-field class="option-field">
+                                <input matInput placeholder="Enter Option" formControlName="optionContent">
+                            </mat-form-field>
+                        </div>
+                        <!-- "(click)"="removeGroup(j)" -->
+                        <div class="close-icon">
+                            <mat-icon (click)=removeGroup(j)>clear</mat-icon>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+
+            </div>
+
+            <button mat-raised-button color="primary" style='width: 15em;' (click)="addOption()">Add
+                Another Option</button>
+
+            <div fxLayoutAlign="space-between center" fxLayout="row wrap">
+                <mat-form-field hintLabel="Should be in number" class="fields">
+                    <input matInput #input maxlength="2" placeholder="Max Score" class="placeholder" formControlName="maxScore">
+                    <mat-hint align="end">{{input.value?.length || 0}}/2</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field hintLabel="Should be in number" class="fields">
+                    <input matInput #input maxlength="3" placeholder="Max Duration In Min" class="placeholder" formControlName="maxDurationMins">
+                    <mat-hint align="end">{{input.value?.length || 0}}/3</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="fields">
+                    <mat-label>Difficulty level</mat-label>
+                    <mat-select formControlName="difficultyLevel">
+                        <mat-option *ngFor="let i of difficultyLevel" [value]="i.value">
+
+                            {{i.value}}
+
+                        </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+            </div>
+
+
+
+            <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="30px">
+
+
+
+                <button *ngIf="showSave==true" mat-raised-button (click)="Close()">Cancel</button>
+                <button mat-raised-button color="warn" (click)="reset(i)">Reset</button>
+                <!-- <mat-icon *ngIf="showSave==undefined" color="accent" (click)="addCard()" class="addCard"> add_circle
+                </mat-icon> -->
+
+                <button *ngIf="showSave==undefined" mat-raised-button color="primary" (click)="openDialog(i)" [disabled]="!i.addQuestion.valid || answerKeysOption.length==0">Preview</button>
+
+                <button *ngIf="showSave==true" mat-raised-button color="primary" (click)="onSave(i)" [disabled]="!i.addQuestion.valid || answerKeysOption.length==0">Save</button>
+                <button *ngIf="showEditChoice ==true" mat-raised-button color="primary" (click)="editQuestion()">Update</button>
+
+            </div>
+
+        </form>
+
+    </mat-card>
+
+
+
+</div>

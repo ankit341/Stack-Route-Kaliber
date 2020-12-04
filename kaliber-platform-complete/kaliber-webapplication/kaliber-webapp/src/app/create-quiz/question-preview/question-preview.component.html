@@ -1,0 +1,43 @@
+<!-- <mat-card-header fxLayout="row" fxFlexAlign="left" class="header">Question Preview</mat-card-header> -->
+<mat-card-content>
+    <mat-card-title class="title"><b>{{data.question.questionTitle}}</b></mat-card-title>
+    <mat-card-title>
+        <markdown class="variable-binding" [data]="markdown"></markdown>
+    </mat-card-title>
+
+    <div *ngIf="data.question.questionType == 'MCQ'">
+        <div class="options" *ngFor="let i of data.question.answerOptions">
+            <div *ngIf="i.optionContent== data.question.answerKeys[0]; else elseblock">
+                <mat-radio-group>
+                    <mat-radio-button [checked]="true" (click)="my()">{{i.optionContent}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <ng-template #elseblock>
+                <mat-radio-button (click)="my()">{{i.optionContent}}</mat-radio-button>
+            </ng-template>
+        </div>
+    </div>
+
+    <div *ngIf="data.question.questionType === 'MMCQ'">
+        <div class="options" *ngFor="let i of data.question.answerOptions">
+            <mat-checkbox [checked]="data.question.answerKeys.includes(i.optionContent)">{{i.optionContent}}
+            </mat-checkbox>
+        </div>
+    </div>
+
+</mat-card-content>
+
+
+<mat-card-actions>
+    <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="30px">
+        <button mat-button (click)="onNoClick()">Cancel</button>
+
+        <div *ngIf="!editQuestionButton">
+            <button mat-button [mat-dialog-close]="data.question" color="primary" type="submit" (click)="onSubmit() " (click)="openSnackBar()" aria-label="Show an example snack-bar" cdkFocusInitial>Save</button>
+        </div>
+        <div *ngIf="editQuestionButton">
+            <button mat-raised-button color="primary" (click)="editQuestion(data.question)">Edit</button>
+        </div>
+    </div>
+</mat-card-actions>

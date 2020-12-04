@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* You can add global styles to this file, and also import other style files */
+
+// @import '~@angular/material/prebuilt-themes/indigo-pink';
+@import '~@angular/material/_theming';
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+@include mat-core();
+$primary: mat-palette($mat-light-blue);
+$secondary:mat-palette($mat-light-blue,
+200);
+$accent: mat-palette($mat-blue);
+$theme: mat-light-theme($primary,
+$accent);
+$font-family: 'Roboto';
+@include angular-material-theme($theme);
+body,
+html {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+    height: 100%;
+}
+
+.mat-toolbar.mat-secondary {
+    background: #ffffff;
+    color: #666;
+}
+
+.container {
+    background-color: #ffffff;
+    border: solid #a3a3a3;
+    border-width: 0 1.5px;
+    min-height: 90%;
+}
+
+.container .layout-row {
+    border: 1px solid red;
+    margin: 15px 0;
+    padding: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .kaliber-title {
+        font-size: 56px;
+        opacity: 1 !important;
+    }
+    .kaliber-subtitle {
+        font-size: 20px;
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+    .page-view.texture-background {
+        height: 35em;
+    }
+    .banner-button {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .kaliber-title {
+        font-size: 55px;
+    }
+    .kaliber-subtitle {
+        font-size: 25px;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+    .page-view.texture-background {
+        height: 582px;
+    }
+    .nav-title {
+        font-size: 25px;
+    }
+    .google-button {
+        margin-top: 4em
+    }
+}
+
+.ng-sidebar {
+    background-color: #D3D3D3;
+    width: 17em;
+    padding: 4px;
+}
+
+.ng-sidebar--right {
+    background-color: #D3D3D3;
+    width: 17em;
+    padding: 4px;
+}
+
+// h2{
+//     background-color: lightblue;
+//   }

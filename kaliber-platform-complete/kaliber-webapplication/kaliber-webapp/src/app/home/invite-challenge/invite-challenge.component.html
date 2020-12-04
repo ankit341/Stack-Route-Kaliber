@@ -1,0 +1,29 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h3 align="center" *ngIf="value=='invite'">Invite</h3>
+        <h3 align="center" *ngIf="value=='challenge'">Challenge</h3>
+        ​
+    </mat-toolbar-row>
+</mat-toolbar>
+​
+<div *ngIf="FollowerDetails!=null" fxLayout="column">
+    <mat-card class="example-card" *ngFor="let user of FollowerDetails">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.xs="column" fxLayoutGap="3em">
+                <img class="image" src={{user.avatarURL}}>
+                <div fxLayout="column">
+                    <mat-card-title class="title">{{user.name | titlecase}}</mat-card-title>
+                    <mat-card-subtitle>Points: {{user.totalPoints | number: '1.0-0'}}</mat-card-subtitle>
+                </div>
+            </div>
+            <div>
+                <mat-checkbox class="checkbox" (change)="onChange($event,user)"></mat-checkbox>
+            </div>
+        </div>
+    </mat-card>
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="Close()">Close</button>
+        <button *ngIf="value=='invite'" (click)="sendInvitation()" mat-raised-button color="primary" class="mat-button">Invite</button>
+        <button *ngIf="value=='challenge'" (click)="sendChallenge()" mat-raised-button color="primary" class="mat-button">Challenge</button>
+    </mat-dialog-actions>
+</div>

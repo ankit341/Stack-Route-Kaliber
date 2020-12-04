@@ -1,0 +1,60 @@
+<div class="mychanges" [class.mat-elevation-z13]="!isActive" [class.mat-elevation-z7]="isActive" *ngFor='let section of quizSections;let i=index'>
+    <mat-card fxLayoutGap="8px" fxLayout="column" fxFlexAlign="center" fxFlexFill class="sectionCard">
+        <form class="form-app" [formGroup]="section.createSection">
+            <mat-card-content fxLayoutAlign="space-between">
+                <div>
+                    <mat-form-field class="section-title">
+                        <input matInput placeholder="Section Title" value="" formControlName="sectionTitle">
+                    </mat-form-field>
+
+                </div>
+                <mat-icon *ngIf="i>0" matTooltip="Close Section" matTooltipPosition="below" (click)="remove(section,i)" class="section-icons">clear</mat-icon>
+            </mat-card-content>
+
+            <section class="questionSection">
+                <div (myQuestions)="showMessage($event,section)"></div>
+            </section>
+            <section *ngFor="let question of section.sectionAndQuestions;let j=index">
+
+
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{question.questionTitle}}</mat-panel-title>
+                        <div fxLayout="row" class="deleteQuestion">
+                            <mat-icon (click)="removeQuestion(section,question,j)">highlight_off</mat-icon>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <div>
+                        <p>Duration: {{question.maxDurationMins}}</p>
+                        <p>Score: {{question.maxScore}}</p>
+                        <div fxLayout="row" fxLayoutAlign="end">
+                            <mat-icon matTooltip="FollowUp Question" matTooltipPosition="below" (click)="AddLinkQuestion(question,section,'followUp')" class="quiz-icons">note_add</mat-icon>
+                            <mat-icon matTooltip="Diagonistic Question" matTooltipPosition="below" (click)="AddLinkQuestion(question,section,'diag')" class="quiz-icons">donut_small</mat-icon>
+                            <mat-icon matTooltip="Alternative Question" matTooltipPosition="below" (click)="AddLinkQuestion(question,section,'alter')" class="quiz-icons">add_box</mat-icon>
+                        </div>
+
+                    </div>
+                </mat-expansion-panel>
+
+            </section>
+            <div class="section-button" fxLayout="row wrap">
+                <button mat-raised-button color="primary" class="mat-button" (click)="AddQuestion(section)">ADD A QUESTION</button>
+
+            </div>
+            <div *ngIf="section.sectionSaved==true" class="max-score" fxLayout="row wrap">
+                <h3>Total Questions: {{section.questionCountPerSection}}</h3>
+
+                <h3>Maximum Score: {{section.scorePerSections}}</h3>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="end">
+
+                <button mat-raised-button color="primary" class="mat-button" [disabled]="!section.sectionSaved" (click)="AddSection()">ADD ANOTHER SECTION</button>
+
+                <button mat-raised-button color="primary" class="mat-button" [disabled]="!section.createSection.valid || section.sectionSaved==true" (click)="isClicked = !isClicked" [class.myClass]="isClicked" (click)="SaveSection(section,i)">SAVE</button>
+
+            </div>
+        </form>
+
+    </mat-card>
+</div>

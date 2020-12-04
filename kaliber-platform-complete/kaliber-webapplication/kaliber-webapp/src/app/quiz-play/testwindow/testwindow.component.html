@@ -1,0 +1,93 @@
+<div class="spinner" *ngIf="!hasData" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="50"></mat-spinner>
+    <h3>Loading please wait..</h3>
+</div>
+<div *ngIf="hasData" class="quizContainer" fxLayout="row wrap" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+    <!-- <mat-progress-spinner *ngIf="!hasData" mode="indeterminate">
+    {{ errorMsg }}
+        </mat-progress-spinner> -->
+    <div fxFlex="70%" fxLayoutAlign="center">
+        <h3>{{quizTitle | titlecase}}
+            <!-- Java Teaser1 -->
+        </h3>
+    </div>
+    <section fxFlex="70%" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutAlign.xs="space-between center">
+            <div fxLayout="row" fxLayoutGap="0.5em">
+                <ngx-avatar *ngFor="let data of questionNumberArray" [bgColor]="data.bgColor" [fgColor]="data.fgColor" [value]="data.number" size="50"></ngx-avatar>
+            </div>
+            <p>SectionTitle: {{sectionArray[indexOfSection][0].sectionTitle}}
+            </p>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <div>Time Remaining</div>
+            <span class="timer">{{ minutesInString }}:{{ secondsInString }}</span>
+        </div>
+
+    </section>
+    <div fxFlex="75%" [class.mat-elevation-z6]="isActive" fxLayout="row" fxLayoutAlign="start start" fxLayout.xs="row" fxLayoutGap="0.5em">
+        <div fxFlex="7%" fxLayout="column" class="qnum">
+            <ngx-avatar size="35" [value]="questionNumber" bgColor="#e3e5e8" fgColor="#03a9f4"></ngx-avatar>
+            <!-- <ngx-avatar size="35" bgColor="#red"><mat-icon>flag</mat-icon></ngx-avatar> -->
+            <!-- <span class="iconify" data-icon="el:flag-alt" data-inline="false"></span>  -->
+            <!-- <mat-icon style="color: red">flag</mat-icon> -->
+
+        </div>
+
+        <section *ngIf="question!=null" class="sheet" fxLayout="column" fxLayoutAlign="space-between start" fxFlex="auto" fxLayoutGap="0.8em">
+            <div style="margin: 0.5em">
+                {{question.questionTitle}}
+            </div>
+            <div class="concept">
+                <mat-chip-list fxLayout="row wrap">
+                    <mat-chip class="concept" *ngFor="let concept of question.concepts.name">
+                        {{concept | titlecase}}
+                    </mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="content">
+                <markdown [data]="question.questionContent"></markdown>
+            </div>
+            <mat-radio-group [(ngModel)]="answer" (change)="onOptionSelect($event)" *ngIf="question.questionType=='MCQ'">
+                <div *ngFor="let option of question.answerOptions" class="optionText" fxLayout="row" fxLayoutAlign="start start">
+                    <mat-radio-button [value]="option">
+                    </mat-radio-button>
+                    <span>{{option.optionContent}}</span>
+                </div>
+            </mat-radio-group>
+
+            <div *ngIf="question.questionType=='MMCQ'">
+                <div *ngFor="let option of question.answerOptions" fxLayout="row" fxLayoutAlign="start start" class="optionText" fxLayoutGap="0.5em">
+                    <mat-checkbox [value]="option" (change)="onCheck($event,option)">
+                    </mat-checkbox>
+                    <span>{{option.optionContent}}</span>
+                </div>
+            </div>
+
+
+
+            <div class="confidence" *ngIf="allowWager">
+                <p> How sure are you? </p>
+                <mat-radio-group [(ngModel)]="confidenceWager" [disabled]="confidenceDisabled" (change)="onConfidenceSelect($event)" fxLayout="row wrap" fxLayoutGap="1em" fxLayout.xs="column" fxLayoutAlign="space-between start">
+                    <mat-radio-button *ngFor="let confidence of confidenceWagerArray" [value]="confidence" class="radioText">
+                        {{confidence.label}}
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="end end" fxLayoutGap="0.5em">
+                <p class="skip">*you cannot return back to this question</p>
+                <div>
+                    <button class="btn1" mat-stroked-button (click)="skip()">SKIP</button>
+                </div>
+                <button class="btn2" mat-raised-button color="primary" (click)="next()" [disabled]="!isNext">
+                    NEXT
+                </button>
+            </div>
+        </section>
+    </div>
+</div>
+<div *ngIf="hasData" class="finishQuiz" fxLayout="column" fxLayoutAlign="center center">
+    <button mat-raised-button class="btn3" (click)="finishQuiz()">
+        FINISH QUIZ
+    </button>
+</div>

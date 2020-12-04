@@ -1,0 +1,78 @@
+<div class="spinner" *ngIf="loaded==false" fxLayout="column" fxLayoutAlign="center center">
+  <mat-spinner [diameter]="50"></mat-spinner>
+  <h3>Loading quiz submissions.</h3>
+</div>
+
+<div *ngIf="loaded==true" style="margin:2em">
+  <mat-toolbar fxLayoutAlign="center center">Quiz Submissions</mat-toolbar>
+  <div *ngIf="count>0; else elseBlock">
+    <div align="right" class="count">Showing {{count1}} out of {{count}}</div>
+  </div>
+
+  <ng-template #elseBlock>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h3>There are no quiz submissions to display.</h3>
+    </div>
+  </ng-template>
+
+  <div id="scroller" ngxInfiniteScroller strategy="scrollingToBoth" (onScrollDown)="onScroll()">
+    <div fxHide fxShow.gt-sm>
+      <div *ngFor="let quizsub of quizSub" flex="70" fxLayout="row" fxLayoutAlign="center">
+        <mat-card flex="70" (click)="onclick(quizsub.submissionId)" style="padding: 15px;cursor: pointer"
+          class="cardalign">
+          <mat-chip matTooltip="Points scored" color="accent" class="custombutton" selected>
+            <strong>{{quizsub.totalPointsScored}}</strong>
+          </mat-chip>
+          <mat-card-header>
+            <div mat-card-avatar *ngIf="quizsub.userName!=null" class="example-header-image"><br>
+              <div class="name">{{quizsub.userName.substring(0,2).toUpperCase()}}</div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutWrap>
+              <mat-card-title color="primary" selected>{{quizsub.userName}} attempted {{quizsub.quizCode}} quiz
+                {{quizsub.createdOn}}
+              </mat-card-title>
+              <mat-card-subtitle>
+                <mat-icon>done</mat-icon>{{quizsub.quizStartTime}}&nbsp;&nbsp;&nbsp;
+                <mat-icon>done_all</mat-icon>{{quizsub.quizEndTime}}
+              </mat-card-subtitle>
+            </div>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+
+    <div fxHide.xs="false" fxHide.md="true" fxHide.lg="true" fxHide.gt-lg="true">
+      <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <div *ngFor="let quizsub of quizSub">
+          <mat-card (click)="onclick(quizsub.submissionId)" style="width:220px">
+            <div fxLayout="row-reverse wrap" fxLayoutAlign="space-between center" fxLayoutGap="1em">
+              <mat-chip matTooltip="Points scored" style="background-color:#878a8cb3">
+                <strong style="font-size:25px;color:white;padding:7px"
+                  matTooltip="Points scored">{{quizsub.totalPointsScored}}</strong>
+              </mat-chip>
+              <div mat-card-avatar *ngIf="quizsub.userName!=null" style="height:4em;width:4em"
+                class="example-header-image"><br>
+                <div class="name" style="font-size: 28px">{{quizsub.userName.substring(0,2).toUpperCase()}}</div>
+              </div>
+            </div>
+            <hr>
+            <mat-card-header>
+              <div fxLayout="column" fxLayoutAlign="space-between start" fxLayoutWrap>
+                <mat-card-title style="margin-left:-27px;margin-top:9px" color="primary" selected>
+                  {{quizsub.userName}}
+                  attempted {{quizsub.quizCode}} quiz
+                  {{quizsub.createdOn}}
+                </mat-card-title>
+                <mat-card-subtitle style="margin-left:-29px;margin-bottom:-9px">
+                  <mat-icon>done</mat-icon>{{quizsub.quizStartTime}}<br>
+                  <mat-icon>done_all</mat-icon>{{quizsub.quizEndTime}}
+                </mat-card-subtitle>
+              </div>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<mat-toolbar fxLayoutAlign="center center">Author Question</mat-toolbar>
+<form>
+    <p style="margin-left: 2em;">Please select a question type </p>
+    <mat-form-field class="form-app" style="width: 30em;" style="margin-left: 2em;">
+        <mat-label>Question type</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let i of question" [value]="i.value" (click)="showQuestionType(i)">
+
+                {{i.value}}
+
+            </mat-option>
+        </mat-select>
+
+    </mat-form-field>
+    <div *ngIf="questionType=== 0">
+        <app-question [showSave]="showSave"></app-question>
+
+    </div>
+    <div *ngIf="questionType=== 1">
+        <app-multiple-answer [showSave]="showSave"></app-multiple-answer>
+
+    </div>
+</form>

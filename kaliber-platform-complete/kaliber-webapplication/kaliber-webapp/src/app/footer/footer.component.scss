@@ -1,0 +1,27 @@
+.page-view {
+    text-align: center;
+    background: linear-gradient(to left, #085369, #43b2f1);
+    .inner-content {
+        height: 100%;
+    }
+    .title {
+        color: white;
+        display: block;
+        // font-family: $font-family;
+        font-size: 40px;
+        margin-top: 30px;
+        &.dark-color {
+            color: #333;
+        }
+        .sub-title {
+            display: block;
+            // font-family: $font-family;
+            font-size: 20px;
+            margin-top: 10px;
+            color: #ffffff;
+            margin-left: 3em;
+            margin-right: 3em;
+            margin-bottom: 1em;
+        }
+    }
+}

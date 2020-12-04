@@ -1,0 +1,146 @@
+.quizLobbyContainer {
+  margin: 3em;
+}
+
+.quiztitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 45px;
+}
+
+.listinstr {
+  list-style: none;
+  font-size: 17px;
+  padding-left: 38px;
+}
+
+.mat-card-header .mat-card-title {
+  margin-bottom: 15px;
+  font-size: 51px;
+  text-align: center;
+}
+
+.mat-card {
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+  display: block;
+  border-radius: 4px;
+  padding: 7px 0px;
+}
+
+.mat-card-header .mat-card-subtitle:not(:first-child) {
+  margin-top: -17px;
+  font-size: 20px;
+  color: rgba(0, 0, 0, .54);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0em;
+}
+
+.sectiontitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.section {
+  padding-top: 22px;
+  list-style: none;
+}
+
+.section-content {
+  font-size: 21px;
+}
+
+mat-chip-list-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.note {
+  font-size: 18px;
+  font-weight: 800;
+  color: #010101;
+}
+
+.notes {
+  padding-top: 7px;
+  margin-left: -24px;
+  font-size: 20px;
+  color: gray;
+}
+
+.mychip {
+  font-size: 20px;
+  font-weight: 400;
+  color: #000;
+  background-color: #e0dada;
+  margin: 7px 4px;
+}
+
+.btn {
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: -11px;
+  margin-left: 0px;
+  padding-right: 11px;
+}
+
+
+
+.btn2 {
+  background-color: #b5aeae;
+  color: white;
+}
+
+.btn1:hover {
+  background-color: rgb(210, 221, 219);
+  color: #00acc1;
+}
+
+.btn2:hover {
+  background-color: rgb(210, 221, 219);
+  color: gray;
+}
+
+.mat-list-base .mat-list-item,
+.mat-list-base .mat-list-option {
+  display: block;
+  height: 38px;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  padding: 0;
+}
+
+.icon {
+  display: inline-block;
+  font-size: 74px;
+  /* color: rgba(0, 0, 0, .54); */
+  color: #7c7e81;
+  margin-bottom: 0.7em;
+}
+
+.favicon {
+  font-size: 10px;
+  color: #7c7e81;
+}
+
+.con-icon {
+  font-size: 49px;
+  color: #7c7e81;
+  margin-left: 16px;
+  margin-right: 36px;
+  margin-top: -25px;
+}
+
+.cardalign {
+  border: 0.5px solid rgba(0, 0, 0, .09);
+  margin-top: -7px;
+  margin: 16px 1px 29px;
+  min-width: 210px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 0 2px 2px -1px #43b2f1, 0 1px 1px 0 #43b2f1, 0 1px 3px 0 #43b2f1;
+}

@@ -1,0 +1,72 @@
+<div>
+  <form [formGroup]="Options">
+    <!-- <label id="example-radio-group-label">Add Options
+      <mat-icon (click)="Add(addOptions)" class="option">add</mat-icon>
+    </label> -->
+
+    <div  >
+     
+        
+
+      <div fxLayoutAlign="space-between center" fxLayout="row wrap" *ngIf="typeChecking==='MCQ'">
+
+       
+
+          <div *ngIf="withoutMarkdown">
+            <mat-radio-button class="example-margin" [value]="Options.value.content" (click)="append(Options)">
+              <input matInput placeholder="OPTION" class="placeholder" [(ngModel)]="Options.value.content"
+                formControlName="content">
+            </mat-radio-button>
+            <button mat-flat-button class="saveOp" (click)="isClicked = !isClicked" (click)="updateParent()"
+              [class.myClass]="isClicked">
+              Save</button>
+            <button mat-flat-button class="saveOp" (click)="showMarkdown()">
+              Markdown</button>
+           
+          </div>
+       
+          <section>
+          <div *ngIf="makdown">
+            <mat-tab-group>
+              <mat-tab label=Write>
+                <mat-radio-button class="example-margin" [value]="Options.value.content" (click)="append(Options)">
+                  <textarea matInput #input placeholder="Question Content [Mark-down Supported]"
+                    class="variable-textarea" [(ngModel)]="Options.value.content" formControlName="content">
+              </textarea>
+                </mat-radio-button>
+              </mat-tab>
+              <mat-tab label="Preview">
+                <markdown class="variable-binding" [(data)]="Options.value.content"></markdown>
+
+              </mat-tab>
+            </mat-tab-group>
+
+            <button mat-flat-button  (click)="isClicked = !isClicked" (click)="updateParent()"
+              [class.myClass]="isClicked">
+              Save</button>
+            <button mat-flat-button (click)="showMarkdown()">
+              Markdown</button>
+        
+            
+          </div>
+        </section>
+
+      
+
+      </div>
+    </div>
+    <div *ngIf="typeChecking==='MMCQ'">
+
+      <section fxLayout="row wrap" fxLayoutAlign="start">
+
+        <mat-checkbox class="example-margin" [value]="Options.value.content" (click)="append(Options)">
+          <input matInput placeholder="OPTION" class="placeholder" formControlName="content">
+        </mat-checkbox>
+        <button mat-flat-button class="saveOp" [disabled]="!Options.valid" (click)="isClicked = !isClicked"
+          (click)="updateParent()" [class.myClass]="isClicked">
+          Save</button>
+      </section>
+
+    </div>
+  </form>
+</div>

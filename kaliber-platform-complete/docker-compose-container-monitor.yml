@@ -1,0 +1,15 @@
+version: '3'
+
+# Refer http://jmkhael.io/deploy-swarm-services-with-the-new-docker-stack-and-a-compose-file-2/
+
+services:
+
+  portainer:
+    image: portainer/portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9000:9000
+    deploy:
+      placement:
+        constraints: [node.role == manager]

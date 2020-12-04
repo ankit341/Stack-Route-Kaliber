@@ -1,0 +1,48 @@
+<mat-nav-list class="list">
+    <div [ngStyle]="{'background-image': userProfileAvatarUrl , 'background-size': 'cover', 'height': '14em', 'background-repeat' : 'no-repeat' }" fxLayout="column-reverse">
+        <div class="profile-name" fxLayout="column">
+            <p class="userName">{{username | titlecase}}</p>
+            <p class="userEmail">{{useremail}}</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/dashboard" (click)="onToggleClose()">
+        <mat-icon class="nav-icon">home</mat-icon>
+        <span>Dashboard</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/createquiz" (click)="onToggleClose()">
+        <mat-icon class="nav-icon">queue</mat-icon>
+        <span>Author Quiz</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/takenquizes" (click)="onToggleClose()">
+        <mat-icon class="nav-icon">check_circle</mat-icon>
+        <span>Played Quizzes</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/createdquizes" (click)="onToggleClose()">
+        <mat-icon class="nav-icon">note_add</mat-icon>
+        <span>Authored Quizzes</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/createquestion" (click)="onToggleClose()">
+        <mat-icon class="nav-icon">assignment</mat-icon>
+        <span>Author Question</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/adminquizbank" (click)="onToggleClose()" *ngIf="userRoleStatus">
+        <mat-icon class="nav-icon">assignment_turned_in</mat-icon>
+        <span>Quiz Bank</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/adminquizsubmission" (click)="onToggleClose()" *ngIf="userRoleStatus">
+        <mat-icon class="nav-icon">track_changes</mat-icon>
+        <span>Quiz Submissions</span>
+    </a>
+    <mat-divider></mat-divider>
+    <a mat-list-item routerLink="/questionbank" (click)="onToggleClose()" *ngIf="userRoleStatus">
+        <mat-icon class="nav-icon">dynamic_feed</mat-icon>
+        <span>Question Bank</span>
+    </a>
+</mat-nav-list>

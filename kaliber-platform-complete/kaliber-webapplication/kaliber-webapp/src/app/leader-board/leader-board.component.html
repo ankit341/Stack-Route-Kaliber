@@ -1,0 +1,287 @@
+<mat-toolbar fxLayoutAlign="center center" id="">LEADERBOARD</mat-toolbar>
+<section fxLayout="column" fxLayoutAlign="space-around " *ngIf="!quizLeaderBoardData">
+    <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-evenly center" class="parentdiv" style="margin-left: 8%;margin-right: 8%; padding-right:12% ;">
+        <mat-divider fxHide.xs="true" fxFlex="30%"></mat-divider>
+        <div fxHide.lt-md="true">
+            <img src="../../assets/images/boy.jpeg" style="height: 7em; width: 7em;">
+            <div>
+                <mat-icon style="color:silver">filter_2</mat-icon>
+            </div>
+        </div>
+        <mat-divider fxHide.xs="true" fxFlex="30%"></mat-divider>
+        <div>
+            <img src="../../assets/images/boy.jpeg" style="height: 9em; width: 9em;">
+            <div>
+                <mat-icon style="color:gold">filter_1</mat-icon>
+            </div>
+        </div>
+        <mat-divider fxHide.xs="true" fxFlex="30%"></mat-divider>
+        <div fxHide.lt-md="true">
+            <!-- <mat-icon style="height: 6em; width: 6em;">account_circle</mat-icon> -->
+            <img src="../../assets/images/boy.jpeg" style="height: 6em; width: 6em;">
+            <div>
+                <mat-icon style="color:brown">filter_3</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-around center">
+        <div style="margin-left: 8%; margin-right: 8%;">
+            <p class="user_rank" style="text-align: center; font-size: 30px;"> Be the first one to play the quiz and get on the leaderboard !!</p>
+        </div>
+        <mat-divider></mat-divider>
+        <div style="margin-top: 4%; margin-right:2%">
+            <button mat-icon-button color="primary" (click)="routeToQuizLobby()">
+                <mat-icon style="font-size: 40px; padding-right: 10px;padding-top: 5px;">play_circle_filled</mat-icon>&nbsp;&nbsp;Play Quiz
+            </button>
+        </div>
+    </div>
+</section>
+<section fxLayout="row wrap" fxLayoutAlign="space-around" *ngIf="quizLeaderBoardData">
+    <section fxHide.xs="false" fxHide.md="true" fxHide.lg="true" fxHide.gt-lg="true" style="margin-left: 5%;margin-right: 5%;">
+        <mat-card class="example-card-2">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': userProfileAvatarUrl, 'height': '60px', 'width': '60px' }">
+                </div>
+                <mat-card-title>{{ userName }} </mat-card-title>
+                <mat-card-subtitle>Java Developer</mat-card-subtitle>
+            </mat-card-header>
+            <section style="margin-top:5%; margin-bottom:5%;" *ngIf="userAbsence">
+                <p class="user_rank" style="font-size: 20px; text-align: center;">Play the quiz to see your standing</p>
+            </section>
+            <section *ngIf="userPresence">
+                <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-around center">
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">{{ userInCard.position}}</p>
+                        <p>RANK</p>
+                    </div>
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">{{ userInCard.userPoints }}</p>
+                        <p>MARKS</p>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-around center">
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">{{ userInCard.userStarRating }}
+                            <mat-icon>star</mat-icon>
+                        </p>
+                        <p>User Rating</p>
+                    </div>
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">
+                            <mat-icon *ngIf="userInCard.positionChange > 0" style="color: green;">arrow_upward
+                            </mat-icon>
+                            <mat-icon *ngIf="userInCard.positionChange < 0" style="color: red;">arrow_downward
+                            </mat-icon>
+                            <mat-icon *ngIf="userInCard.positionChange == 0">drag_handle</mat-icon>
+                            &nbsp;{{ userInCard.positionChange }}
+                        </p>
+                        <p style="margin-left:2%;">Movement</p>
+                    </div>
+                </div>
+            </section>
+            <mat-divider></mat-divider>
+            <div style="margin-left: 3%; margin-top: 2%;" *ngIf="userPresence">
+                <button mat-icon-button color="primary" (click)="routeToQuizLobby()">
+                    <mat-icon style="font-size: 50px; padding-left: 37px; padding-right: 35px; padding-top: 6px;">play_circle_filled</mat-icon>&nbsp;Play Quiz Again
+                </button>
+            </div>
+            <div style="margin-left: 3%; margin-top: 2%;" *ngIf="userAbsence">
+                <button mat-icon-button color="primary" (click)="routeToQuizLobby()">
+                    <mat-icon style="font-size: 50px; padding-left: 37px; padding-right: 35px; padding-top: 6px;">play_circle_filled</mat-icon>&nbsp;Play Quiz
+                </button>
+            </div>
+        </mat-card>
+        <div class="scroll-to-top">
+            <!-- <button mat-icon-button>
+                <mat-icon>vertical_align_top</mat-icon>
+            </button> -->
+        </div>
+    </section>
+    <section fxFlex="65%">
+        <div fxHide.xs="false" fxHide.md="true" fxHide.lg="true" fxHide.gt-lg="true">
+            <p style="text-align: center;">
+                Overall Standings:
+            </p>
+        </div>
+        <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-around center" class="parentdiv">
+            <mat-divider fxHide.xs="true" fxFlex="20%"></mat-divider>
+            <div fxHide.lt-md="true">
+                <div fxLayout="column" fxLayoutAlign="center center" *ngIf="userRank2Boolean">
+                    <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': userAvatarRank2, 'height': '8em', 'width': '8em' }"></div>
+                    <div>
+                        <p>{{ userRank2.name | uppercase }}</p>
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!userRank2Boolean">
+                    <img src="../../assets/images/boy.jpeg" style="height: 8em; width: 8em;">
+                    <div>
+                    </div>
+                </div>
+                <div>
+                    <mat-icon style="color:silver">filter_2</mat-icon>
+                </div>
+            </div>
+            <mat-divider fxHide.xs="true" fxFlex="20%"></mat-divider>
+            <div>
+                <div fxLayout="column" fxLayoutAlign="center center">
+                    <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': userAvatarRank1, 'height': '10em', 'width': '10em' }">
+                    </div>
+                    <div>
+                        <p>{{ userRank1.name | uppercase }}</p>
+                    </div>
+                </div>
+                <div>
+                    <mat-icon style="color:gold">filter_1</mat-icon>
+                </div>
+            </div>
+            <mat-divider fxHide.xs="true" fxFlex="20%"></mat-divider>
+            <div fxHide.lt-md="true">
+                <div fxLayout="column" fxLayoutAlign="center center" *ngIf="userRank3Boolean">
+                    <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': userAvatarRank3, 'height': '6em', 'width': '6em' }"></div>
+                    <div>
+                        <p>{{ userRank3.name | uppercase}}</p>
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center center" *ngIf="!userRank3Boolean">
+                    <img src="../../assets/images/boy.jpeg" style="height: 6em; width: 6em;">
+                    <div>
+                        <!-- <p>{{ userRank3.name }}</p> -->
+                    </div>
+                </div>
+                <div>
+                    <mat-icon style="color:brown">filter_3</mat-icon>
+                </div>
+            </div>
+            <mat-divider fxHide.xs="true" fxFlex="20%"></mat-divider>
+        </div>
+        <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-around center" style="height:100px">
+            <div fxLayout="column" fxLayout.xs="row" fxLayoutAlign="center center">
+                <p fxHide.xs="true" class="quiz-info" style="margin-top: 0px; margin-bottom: 0px;">{{ quizDetails.title | titlecase }}</p>
+                <p fxHide.xs="true" class="quiz-info" style="margin-top: 0px; margin-bottom: 0px;">Authored by-{{ quizCreatedBy | titlecase }}</p>
+            </div>
+            <h6 fxHide.xs="true" class="quiz-code" style="font-size: 35px;">{{ quizDetails.quizCode | titlecase }}</h6>
+            <h6 fxHide fxShow.xs class="quiz-code" style="text-align: center; font-size: 25px;">{{ quizDetails.quizCode | titlecase }}</h6>
+            <p fxHide.xs="true" class="quiz-info">
+                <mat-icon class="matIconUpdate">update</mat-icon>2 days ago
+            </p>
+        </div>
+        <div fxHide fxShow.gt-sm class="mat-table-data">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="text-align: center; margin-bottom: 5%;">
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> Rank. </th>
+                    <td mat-cell *matCellDef="let element"> <strong> {{element.position}} </strong></td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left;"> Name </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.name | titlecase}} </td>
+                </ng-container>
+                <ng-container matColumnDef="rating">
+                    <th mat-header-cell *matHeaderCellDef> User Rating </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userStarRating}}
+                        <mat-icon class="star-icon">star</mat-icon>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef> Score </th>
+                    <td mat-cell *matCellDef="let element"><strong> {{element.userPoints}} </strong></td>
+                </ng-container>
+                <ng-container matColumnDef="positionChange">
+                    <th mat-header-cell *matHeaderCellDef> Position Change </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon *ngIf="element.positionChange > 0" class="arrow-upward">arrow_upward</mat-icon>
+                        <mat-icon *ngIf="element.positionChange < 0" class="arrow-downward">arrow_downward</mat-icon>
+                        <mat-icon *ngIf="element.positionChange == 0" class="equal-symbol">drag_handle</mat-icon>
+                        {{element.positionChange}}
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        <div class="mat-table-data" fxHide.xs="false" fxHide.md="true" fxHide.lg="true" fxHide.gt-lg="true" style="margin-bottom: 10%;">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="text-align: center;">
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> Rank. </th>
+                    <td mat-cell *matCellDef="let element"> <strong> {{element.position}} </strong></td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left;"> Name </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;">
+                        <mat-icon *ngIf="element.positionChange > 0" class="arrow-upward">arrow_upward</mat-icon>
+                        <mat-icon *ngIf="element.positionChange < 0" class="arrow-downward">arrow_downward</mat-icon>
+                        <mat-icon *ngIf="element.positionChange == 0" class="equal-symbol">drag_handle</mat-icon>
+                        {{element.name | titlecase}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef> Score </th>
+                    <td mat-cell *matCellDef="let element"><strong> {{element.userPoints}} </strong></td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumnMobile"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnMobile;"></tr>
+            </table>
+        </div>
+    </section>
+    <section fxHide fxShow.gt-sm>
+        <mat-card class="example-card-1">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': userProfileAvatarUrl, 'height': '60px', 'width': '60px' }">
+                </div>
+                <mat-card-title>{{ userName }}</mat-card-title>
+                <mat-card-subtitle>JAVA Developer</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider style="margin-top: 2%;"></mat-divider>
+            <section style="margin-top:10%; margin-bottom: 10%;" *ngIf="userAbsence">
+                <p class="user_rank" style="font-size: 20px; text-align: center;">Play the quiz to see your standing</p>
+            </section>
+            <section *ngIf="userPresence">
+                <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-around center">
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <div class="user_rank">{{ userInCard.position}}
+                        </div>
+                        <p>RANK</p>
+                    </div>
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">{{ userInCard.userPoints }}</p>
+                        <p>MARKS</p>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayout.xs="row" fxLayoutAlign="space-around center">
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">{{ userInCard.userStarRating }}
+                            <mat-icon>star</mat-icon>
+                        </p>
+                        <p>User Rating</p>
+                    </div>
+                    <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
+                        <p class="user_rank">
+                            <mat-icon *ngIf="userInCard.positionChange > 0" style="color: green;">arrow_upward
+                            </mat-icon>
+                            <mat-icon *ngIf="userInCard.positionChange < 0" style="color: red;">arrow_downward
+                            </mat-icon>
+                            <mat-icon *ngIf="userInCard.positionChange == 0">drag_handle</mat-icon>
+                            &nbsp;{{ userInCard.positionChange }}
+                        </p>
+                        <p style="margin-left:2%;">Movement</p>
+                    </div>
+                </div>
+            </section>
+            <mat-divider></mat-divider>
+            <div style="margin-left: 3%; margin-top: 2%;" *ngIf="userPresence">
+                <button mat-icon-button color="primary" (click)="routeToQuizLobby()">
+                    <mat-icon style="font-size: 50px;padding-left: 37px; padding-right: 35px; padding-top: 6px;">play_circle_filled</mat-icon>&nbsp;Play Quiz Again
+                </button>
+            </div>
+            <div style="margin-left: 3%; margin-top: 2%;" *ngIf="userAbsence">
+                <button mat-icon-button color="primary" (click)="routeToQuizLobby()">
+                    <mat-icon style="font-size: 50px;padding-left: 37px; padding-right: 35px; padding-top: 6px;">play_circle_filled</mat-icon>&nbsp;Play Quiz
+                </button>
+            </div>
+        </mat-card>
+        <div class="scroll-to-top">
+            <!-- <button mat-icon-button>
+                <mat-icon>vertical_align_top</mat-icon>
+            </button> -->
+        </div>
+    </section>
+</section>

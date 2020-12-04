@@ -1,0 +1,73 @@
+<!-- <div fxLayout="column" fxLayoutAlign="center center" class="scroller" ngxInfiniteScroller strategy="scrollingToBoth"
+    (onScrollDown)="onScroll()">
+
+    <mat-card class="question-card" *ngFor="let question of questionBank" (click)="showQuestion(question)">
+        <div fxLayout="row" fxLayoutAlign="space-start start">
+
+            <mat-card-header>
+                <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="5px">
+                    <mat-card-title>{{question.questionTitle}}</mat-card-title>
+
+                    <div fxLayout="row" fxLayoutAlign="space-around center">
+                        <mat-icon title="Rewards">grade</mat-icon>
+                        <div class="icon-text">{{question.maxScore}} </div>
+                        <mat-chip-list class="chip">
+                            <mat-chip *ngFor="let concept of question.concepts" class="subject-chip">{{concept}}
+                            </mat-chip>
+                        </mat-chip-list>
+                    </div>
+
+                    <div>
+                        <mat-card-subtitle> {{question.createdOn}} </mat-card-subtitle>
+                    </div>
+
+                </div>
+            </mat-card-header>
+        </div>
+    </mat-card>
+</div>
+
+
+<button mat-fab class="addURL-fab-button" (click)="openDialogUpload()" color="primary">
+    <mat-icon>post_add</mat-icon>
+</button> -->
+
+<mat-toolbar fxLayoutAlign="center center">Question Bank</mat-toolbar>
+<div fxLayout="column" fxLayoutAlign="center center" ngxInfiniteScroller strategy="scrollingToBoth" (onScrollDown)="onScroll()">
+    <mat-card class="question-card" *ngFor="let question of questionBank" (click)="showQuestion(question)">
+        <div fxLayout="row" fxLayoutAlign="space-start center">
+            <div>
+                <!-- <ngx-avatar mat-card-avatar name={{question.questionType}} [ngClass]="question.status== 'Active' ? 'green':'red'"></ngx-avatar> -->
+                <div mat-card-avatar [ngClass]="question.status== 'Active' ? 'Green':'Red'">
+                    <p> {{question.questionType}} </p>
+                </div>
+            </div>
+            <mat-card-header>
+                <div fxLayout="column" fxLayoutAlign="space-around start" fxLayoutGap="5px">
+                    <mat-card-title>{{question.questionTitle}}</mat-card-title>
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <div class="question-icon">
+                                <mat-icon title="Rewards" style="margin-right: .4em">emoji_events</mat-icon>
+                                <div class="icon-text">{{question.maxScore}} points</div>
+                            </div>
+                            <div class="question-icon">
+                                <mat-icon title="Time" style="margin-right: .4em; margin-left: 2em;">query_builder</mat-icon>
+                                <div class="icon-text">{{question.maxScore}} min</div>
+                            </div>
+                        </div>
+                        <!-- <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <mat-chip-list class="chip">
+                                <mat-chip style="margin-right:1em;" *ngFor="let concept of question.concepts.name" class="subject-chip">
+                                    {{concept}}</mat-chip>
+                            </mat-chip-list>
+                        </div> -->
+                    </div>
+                    <div>
+                        <mat-card-subtitle>modified {{question.createdOn}} </mat-card-subtitle>
+                    </div>
+                </div>
+            </mat-card-header>
+        </div>
+    </mat-card>
+</div>

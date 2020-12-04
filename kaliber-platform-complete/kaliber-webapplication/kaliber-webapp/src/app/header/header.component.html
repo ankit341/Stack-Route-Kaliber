@@ -1,0 +1,33 @@
+<mat-toolbar color='primary' fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="header-menu" fxLayout="row" fxLayoutAlign='left'>
+        <button mat-icon-button (click)='onToggleOpenSidenav()'>
+            <mat-icon class="Menu">menu</mat-icon>
+        </button>
+        <div fxLayout="column" fxLayoutAlign="left">
+            <a class="app-name" mat-flat-button routerLink="dashboard">
+                <h1>KALIBER</h1>
+            </a>
+        </div>
+
+    </div>
+    <div class="logout" style="margin-top: 2%;">
+        <div fxLayout="row" fxLayoutAlign="right">
+            <div fxShow.lt-sm="false" fxShow.gt-md="true" fxShow="true">
+                <p style="padding-right: 20px; margin-top: 6px">{{ username | titlecase }}</p>
+            </div>
+            <button mat-icon-button [matMenuTriggerFor]="menu" [ngStyle]="{'background-image': userProfileAvatarUrl , 'background-size': 'cover' }">
+                <div mat-card-avatar></div>
+            </button>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item class="logoutButton" routerLink="/myprofile" style="text-align: center;">
+                    <mat-icon>account_circle</mat-icon>Profile
+                </button>
+                <button mat-menu-item (click)="logout()" routerLinkActive="active" style="text-align: center;">
+                    <mat-icon>power_settings_new</mat-icon>Logout
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+
+</mat-toolbar>

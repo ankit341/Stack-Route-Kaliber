@@ -1,0 +1,59 @@
+.page-view {
+  text-align: center;
+}
+
+.page-view.texture-background {
+  background: linear-gradient(to left, #085369, #43b2f1);
+}
+
+.page-view.texture-background:before {
+  content: "";
+  background-image: url("../../assets/images/bg_texture_8.png");
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto !important;
+  opacity: 0.2;
+}
+
+.page-view .inner-content {
+  height: 100%;
+}
+
+.page-view .title {
+  color: white;
+  display: block;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+.page-view .banner-button {
+  background: transparent;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  padding: 20px;
+  font-size: 20px;
+  transition: border 0.5s, background 0.5s, color 0.5s linear;
+  position: relative;
+}
+
+.page-view .banner-button:hover {
+  border: none;
+  background: white;
+  color: #085369;
+}
+
+.banner-background.texture-background {
+  background-image: url("../../assets/images/bg_texture_84.png");
+  height: 35em;
+  transition: background 0.5s linear;
+}
+
+.banner-background.texture-background:before {
+  display: block;
+  position: absolute;
+}

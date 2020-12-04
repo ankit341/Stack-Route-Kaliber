@@ -1,0 +1,81 @@
+.page-view {
+  text-align: center;
+}
+
+.page-view.gallery-background {
+  background-color: white;
+}
+
+.page-view .inner-content {
+  height: 100%;
+}
+
+.page-view .title {
+  color: white;
+  display: block;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+.page-view .title.dark-color {
+  color: #333;
+}
+
+.page-view .title .sub-title {
+  display: block;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+
+.page-view .gallery-items-view {
+  position: relative;
+  width: 100%;
+  padding-left: 3em;
+  background: white;
+}
+
+.page-view .gallery-items-view .showcase {
+  width: 250px;
+  height: 275px;
+  position: relative;
+  background: white;
+}
+
+.page-view .gallery-items-view .showcase:after {
+  background-size: 225px 225px;
+  background-position: top center;
+  background-repeat: no-repeat;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.page-view .gallery-items-view .showcase > div.img-item {
+  margin-top: 33px;
+  margin-right: 28px;
+  margin-left: 28px;
+  height: 150px;
+  width: 140px;
+}
+
+.page-view .gallery-items-view .showcase > div.img-item > img {
+  width: 100%;
+  height: 100%;
+}
+
+.page-view .gallery-items-view .showcase > div.item-title {
+  margin-top: 30px;
+  margin-right: 3em;
+}
+
+.page-view .gallery-items-view .showcase > a {
+  position: relative;
+  z-index: 100;
+}

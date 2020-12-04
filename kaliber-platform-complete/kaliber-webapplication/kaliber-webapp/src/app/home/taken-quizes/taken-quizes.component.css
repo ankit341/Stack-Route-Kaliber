@@ -1,0 +1,125 @@
+.quiz-card {
+    max-width: 370px;
+    padding: 0px;
+    margin: 10px;
+    border: 1em;
+}
+
+.mat-button {
+    margin-top: 10px;
+}
+
+.card-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 7px;
+}
+
+.card-icons {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding-right: 7px;
+}
+
+.description-view {
+    max-width: 300px;
+}
+
+.subject-chip {
+    background-color: #e0dada;
+    color: #00acc1;
+}
+
+.icon-flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon-space {
+    size: 30px;
+    font: 30px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.avatar-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-count {
+    padding-top: 16px;
+    padding-left: 4px;
+    font-size: 13px;
+}
+
+.avtar {
+    padding-top: 20px;
+    padding-left: 2px;
+    margin-left: 15px;
+    margin-top: 1em;
+    background-color: #b2c7f5;
+    font-weight: bold;
+    text-align: center;
+    width: 16%;
+}
+
+.avatar-icons {
+    display: inline-block;
+    transform: scale(1, 1);
+    padding-left: 35px;
+}
+
+.avatar-i {
+    margin-left: -25px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 2.4em;
+    height: 2.4em;
+}
+
+.avatar-i img {
+    width: 50px;
+    height: 50px;
+    transform: scale(1, 1);
+}
+
+.example-header-image {
+    max-width: 70px;
+    max-height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    background-image: url('https://img.icons8.com/color/144/000000/java.png');
+    background-size: cover;
+}
+
+#scroller {
+    height: 80vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.spinner {
+    margin-top: 31%;
+}
+
+.btn {
+    font-size: 17px;
+    font-weight: bold;
+    position: absolute;
+    left: 45%;
+}
+
+.taken-error {
+    margin-top: 12.5em;
+}
+
+.displayInfo {
+    margin-right: 5%;
+}

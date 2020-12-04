@@ -1,0 +1,29 @@
+.page-view {
+  text-align: center;
+  background: linear-gradient(to left, #085369, #43b2f1);
+}
+
+.page-view .inner-content {
+  height: 100%;
+}
+
+.page-view .title {
+  color: white;
+  display: block;
+  font-size: 40px;
+  margin-top: 30px;
+}
+
+.page-view .title.dark-color {
+  color: #333;
+}
+
+.page-view .title .sub-title {
+  display: block;
+  font-size: 20px;
+  margin-top: 10px;
+  color: #ffffff;
+  margin-left: 3em;
+  margin-right: 3em;
+  margin-bottom: 1em;
+}

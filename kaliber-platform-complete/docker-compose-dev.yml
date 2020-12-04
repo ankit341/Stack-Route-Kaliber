@@ -1,0 +1,174 @@
+version: '3'
+
+services:
+  kaliber-naming-server:
+    image: kaliber-naming-server
+    build: kaliber-naming-server
+    restart: always
+    ports:
+      - 8761:8761
+    expose:
+      - 8761
+    env_file:
+      - ./docker_env/development/namingserver-properties.env
+  kaliber-api-gateway:
+    image: kaliber-api-gateway
+    build: kaliber-api-gateway
+    restart: always
+    ports:
+      - 8080:8080
+    env_file:
+      - ./docker_env/development/apigateway-properties.env
+    expose:
+      - 8080
+    depends_on:
+      - kaliber-naming-server
+
+  kaliber-config-server:
+    image: kaliber-config-server
+    build: kaliber-config-server
+    restart: always
+    ports:
+      - 8888:8888
+    env_file:
+      - ./docker_env/development/configserver-properties.env
+    expose:
+      - 8888
+    depends_on:
+      - kaliber-naming-server
+  kaliber-quiz-inventory:
+    image: kaliber-quiz-inventory
+    build: kaliber-quiz-inventory
+    restart: always
+    ports:
+      - 8060:8060
+    env_file:
+      - ./docker_env/development/kaliber-quizinventory-properties.env
+    expose:
+      - 8888
+    depends_on:
+      - kaliber-naming-server
+      - mongo
+
+  kaliber-quiz-play:
+    image: kaliber-quiz-play
+    build: kaliber-quiz-play
+    restart: always
+    ports:
+      - 8070:8070
+    env_file:
+      - ./docker_env/development/kaliber-quizplay-properties.env
+    expose:
+      - 8888
+    depends_on:
+      - kaliber-naming-server
+      - mongo
+      - kaliber-config-server
+
+  kaliber-question-inventory:
+    image: kaliber-question-inventory
+    build: kaliber-question-inventory
+    restart: always
+    deploy:
+      replicas: 3
+    ports:
+      - 8091:8091
+    env_file:
+      - ./docker_env/development/kaliber-questioninventory-properties.env
+    expose:
+      - 8091
+    depends_on:
+      - kaliber-naming-server
+      - mongo
+
+  kaliber-leaderboard:
+    image: kaliber-leaderboard
+    build: kaliber-leaderboard
+    restart: always
+    ports:
+      - 8040:8040
+    env_file:
+      - ./docker_env/development/kaliber-leaderboard-properties.env
+    expose:
+      - 8040
+    depends_on:
+      - kaliber-naming-server
+      - mongo
+
+  kaliber-user-management:
+    image: kaliber-user-management
+    build: kaliber-user-management
+    restart: always
+    ports:
+      - 8095:8095
+    env_file:
+      - ./docker_env/development/kaliber-usermanagement-properties.env
+    expose:
+      - 8095
+    depends_on:
+      - kaliber-naming-server
+      - mongo
+
+  kaliber-webapplication:
+    image: kaliber-webapplication
+    build: kaliber-webapplication
+    restart: always
+    ports:
+      - 8765:8765
+    env_file:
+     - ./docker_env/development/kaliber-webapplication-properties.env
+    expose:
+      - 8765
+    depends_on:
+      - kaliber-naming-server
+      - kaliber-config-server
+      - kaliber-api-gateway
+
+
+  kaliber-semanticservice:
+    image: kaliber-semanticservice
+    build: kaliber-semanticservice
+    restart: always
+    volumes:
+      - $HOME/mavenrepo/:/maven/home/
+    environment:
+      MVN_LOCAL_REPO: /maven/home/
+    env_file:
+      - ./docker_env/production/kaliber-semanticservice-properties.env
+    ports:
+      - 8050:8050
+    expose:
+      - 8888
+      
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes: 
+      - $HOME/Documents/kaliberDb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+
+  neo4j:
+    image: neo4j:latest
+    restart: on-failure
+    expose:
+      - 7474
+      - 7687
+    ports:
+     - 7474:7474  #neo4j connection
+     - 7687:7687  #bolt db
+    environment:
+     - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+     - NEO4J_apoc_import_file_enabled=true
+     - NEO4J_dbms_shell_enabled=true
+     - NEO4J_AUTH=none
+    volumes:
+     - $HOME/Videos/kaliberDB/data:/data
+
+
+  

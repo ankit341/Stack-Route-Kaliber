@@ -1,0 +1,105 @@
+.form-app>* {
+    width: 100%;
+}
+
+.mat-button {
+    margin: 2px;
+}
+
+.preview-button {
+    margin-bottom: 16px;
+    margin-top: 10px;
+}
+
+.quizCard {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.fields {
+    /* justify-content: space-between; */
+    /* width: 35em; */
+    width: 100%;
+}
+
+.max-score {
+    justify-content: space-around;
+}
+
+.section-button {
+    justify-content: space-around;
+}
+
+.section-title {
+    justify-content: center;
+}
+
+.confidenceLabels {
+    width: 19em;
+    /* padding-left: 1%; */
+}
+
+.quiz-section {
+    margin: 1em;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.quiz-title {
+    justify-content: space-between;
+    width: 25em;
+}
+
+.quiz-icons {
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+h2 {
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.example-full-width {
+    width: 100%;
+    overflow: hidden;
+}
+
+.variable-textarea {
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .07);
+    min-height: 150px;
+    padding: 2px;
+    transition: all 300ms ease-out;
+}
+
+.variable-binding {
+    border-radius: 2px;
+    padding: 8px;
+    transition: all 300ms ease-out;
+    display: block;
+    /* float: bottom; */
+    min-height: 150px;
+    transition: all 300ms ease-out;
+}
+
+::ng-deep .mat-input-wrapper {
+    margin-top: 20px;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
+
+.lable-width {
+    min-width: 350px;
+}
+
+.myClass {
+    background-color: blue;
+    color: white;
+}
+
+.create-quiz {
+    margin-bottom: 1.5em;
+}

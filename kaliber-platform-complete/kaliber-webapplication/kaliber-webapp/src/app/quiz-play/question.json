@@ -1,0 +1,82 @@
+{
+    "questions": [
+    {
+        "id": 1,
+        "questionId": 1,
+        "questionTitle": "What is java",
+        "questionType": "mcq",
+        "quizCode": "java001",
+        "domain": "java",
+        "answerOptions": [
+        {
+        	"optionContent": "Java is coffee"
+
+        },
+        {
+        	"optionContent": "Java is Programming Language"
+        },
+        {
+        	"optionContent": "Java is procedural Language"
+        },
+        {
+        	"optionContent": "Java is Object oriented Language"
+        }
+      ],
+       "answerKeys": [
+          "Java is Programming Language"
+       ]
+    },
+    {
+        "id": 2,
+        "questionId": 2,
+        "questionTitle": "What is python",
+        "questionType": "mcq",
+        "quizCode": "java001",
+        "domain": "java",
+        "answerOptions": [
+        {
+        	"optionContent": "Java is coffee"
+
+        },
+        {
+        	"optionContent": "Java is Programming Language"
+        },
+        {
+        	"optionContent": "Java is procedural Language"
+        },
+        {
+        	"optionContent": "Java is Object oriented Language"
+        }
+      ],
+      "answerKeys": [
+          "Java is Programming Language"
+       ]
+    },
+    {
+        "id": 3,
+        "questionId": 3,
+        "questionTitle": "What is springBoot",
+        "questionType": "mcq",
+        "quizCode": "java001",
+        "domain": "java",
+        "answerOptions": [
+        {
+        	"optionContent": "Java is coffee"
+
+        },
+        {
+        	"optionContent": "Java is Programming Language"
+        },
+        {
+        	"optionContent": "Java is procedural Language"
+        },
+        {
+        	"optionContent": "Java is Object oriented Language"
+        }
+      ],
+       "answerKeys": [
+          "Java is Programming Language"
+       ]
+    }
+  ]
+}

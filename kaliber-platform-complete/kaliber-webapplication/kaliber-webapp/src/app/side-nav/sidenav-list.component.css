@@ -1,0 +1,35 @@
+.list span {
+    padding-left: 8px;
+    width: 13em;
+    padding-top: 0;
+}
+
+.profile-name {
+    background: black;
+    color: white;
+    margin: 0;
+    opacity: 0.8;
+    text-align: justify;
+    height: 74px;
+    padding-left: 10px;
+}
+
+.userName {
+    margin: 0;
+    padding-top: 16px;
+    margin-block-end: 0;
+    font-size: x-large;
+}
+
+.userEmail {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-icon {
+    color: rgb(117, 117, 117);
+}
+
+mat-nav-list {
+    padding-top: 0;
+}

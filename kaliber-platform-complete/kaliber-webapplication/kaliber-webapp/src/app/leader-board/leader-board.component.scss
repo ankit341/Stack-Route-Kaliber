@@ -1,0 +1,99 @@
+.parentdiv {
+    padding-top: 2%;
+    padding-bottom: 1%;
+    border: 1px #f2f2f2;
+    background: linear-gradient(to bottom, white 53%, #f2f2f2 47%);
+}
+
+.rank1 {
+    border-radius: 50%;
+    height: 10em;
+    width: 10em;
+    display: flex;
+}
+
+img {
+    border-radius: 50%;
+    height: 7em;
+    width: 7em;
+    display: flex;
+}
+
+div {
+    display: flex;
+}
+
+.mat-icon {
+    font-size: 40px;
+}
+
+.matIconUpdate {
+    font-size: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-table-data th {
+    text-align: center;
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.example-card-1 {
+    width: 300px;
+}
+
+.example-card-2 {
+    min-width: 240px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    ;
+}
+
+.example-header-image {
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 2%;
+    right: 5%;
+}
+
+.star-icon {
+    font-size: 15px;
+}
+
+.arrow-upward {
+    font-size: 15px;
+    color: green;
+}
+
+.arrow-downward {
+    font-size: 15px;
+    color: red;
+}
+
+.equal-symbol {
+    font-size: 15px;
+}
+
+.arrow_user_card {
+    color: green;
+}
+
+.user_rank {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 40px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-top: 15px;
+}
+
+.quiz-info {
+    // font-family: 'Exo 2', sans-serif;
+    font-size: 20px;
+}

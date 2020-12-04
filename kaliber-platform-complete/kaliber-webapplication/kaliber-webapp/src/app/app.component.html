@@ -1,0 +1,34 @@
+<mat-sidenav-container *ngIf="router.url!='/'">
+  <mat-sidenav #sidenav>
+    <app-sidenav-list (closeSideNavigation)="sidenav.close()">
+
+    </app-sidenav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-header (SideNavigationToggle)="sidenav.toggle()">
+
+    </app-header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+<div fxFlex fxLayout="column" *ngIf="router.url==='/'">
+  <app-navbar></app-navbar>
+  <div fxFlex="">
+    <div class="container">
+      <div fxLayout="column">
+        <!--banner-->
+        <app-banner id="banner"></app-banner>
+        <!--gallery-->
+        <app-gallery id="gallery"></app-gallery>
+        <!--features-->
+        <app-feature id="features"></app-feature>
+        <!--footer-->
+        <app-footer id="aboutUs"></app-footer>
+      </div>
+    </div>
+  </div>
+</div>

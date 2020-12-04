@@ -1,0 +1,105 @@
+<div class="quizLobbyContainer">
+    {{errorMsg}}
+    <mat-progress-spinner *ngIf="!hasData" mode="indeterminate">
+    </mat-progress-spinner>
+    <mat-toolbar fxLayoutAlign="start center">{{quiz.title | titlecase}}</mat-toolbar>
+  
+    <!-- <h2 style="text-align: start;font-size:28px">{{quiz.title}}</h2> -->
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <mat-card style="margin-top: 1em;min-width: 230px">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+          <mat-icon class="icon">emoji_events</mat-icon>
+          <mat-card-header>
+            <mat-card-title>{{quiz.maxScore}}</mat-card-title>
+            <mat-card-subtitle>Marks</mat-card-subtitle>
+          </mat-card-header>
+        </div>
+      </mat-card>
+      <mat-card style="margin-top :1em;min-width: 230px">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+          <mat-icon class="icon">access_time</mat-icon>
+          <mat-card-header>
+            <mat-card-title>{{quiz.maxDurationMinutes}}</mat-card-title>
+            <mat-card-subtitle>Minutes</mat-card-subtitle>
+          </mat-card-header>
+        </div>
+      </mat-card>
+      <mat-card style="margin-top: 1em;min-width: 230px">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+          <mat-icon class="icon">help_outline</mat-icon>
+          <mat-card-header>
+            <mat-card-title>{{quiz.totalQuestions}}</mat-card-title>
+            <mat-card-subtitle>Questions</mat-card-subtitle>
+          </mat-card-header>
+        </div>
+      </mat-card>
+      <mat-card style="margin-top: 1em;min-width: 230px">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+          <div class="favicon" fxLayout="column wrap" fxLayoutAlign="space-between center">
+            <div fxFlex="5">
+              <mat-icon>favorite</mat-icon>
+              <mat-icon>favorite</mat-icon>
+              <mat-icon>favorite</mat-icon>
+            </div>
+            <div fxFlex="2">
+              <mat-icon>favorite</mat-icon>
+              <mat-icon>favorite</mat-icon>
+            </div>
+          </div>
+          <mat-card-header>
+            <mat-card-title>5</mat-card-title>
+            <mat-card-subtitle>Attempts</mat-card-subtitle>
+          </mat-card-header>
+        </div>
+      </mat-card>
+      <mat-card *ngIf="quiz.allowWager==true" style="margin-top: 1em;min-width: 230px">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+          <mat-icon class="con-icon">import_export</mat-icon>
+          <mat-card-header>
+            <mat-card-title style="margin-left:-78px;font-size:20px">Confident</mat-card-title>
+          </mat-card-header>
+        </div>
+        <div fxLayout="row-reverse wrap" fxLayoutAlign="space-around center" fxLayoutGap="1em">
+          <mat-icon class="con-icon">import_export</mat-icon>
+          <mat-card-header>
+            <mat-card-title style="margin-right: -77px;margin-bottom: 11px; margin-top: 5px; font-size: 20px">Not
+              Confident</mat-card-title>
+          </mat-card-header>
+        </div>
+      </mat-card>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <div fxLayout="column">
+      <div fxFlex="40">
+        <li *ngFor="let section of quiz.sections" class="section">
+          <div style="margin-bottom: 10px">
+            <mat-list-item role="listitem" class="section-content"><span class="sectiontitle">SECTION
+                {{section.sectionTitle}} :</span>&nbsp; It has {{quiz.totalQuestions}} questions for total marks of
+              {{quiz.maxScore}}.</mat-list-item>
+          </div>
+          <mat-chip-list>
+            <mat-chip class="mychip" *ngFor="let concept of quiz.concepts">
+              {{concept | titlecase}}
+            </mat-chip>
+          </mat-chip-list>
+        </li>
+      </div>
+      <div fxFlex="50">
+        <mat-card style="padding: 15px" class="cardalign">
+          <div class="note">
+            PLEASE NOTE :</div>
+          <ul>
+            <li class="notes">You will be rewarded with a bonus for correctly answered questions.</li>
+            <li class="notes">There is a penalty score for incorrectly answered questions.</li>
+            <li class="notes">You cannot switch between tabs once the test has started.</li>
+            <li *ngIf="quiz.allowWager==true" class="notes">This is a CONFIDENCE based quiz.</li>
+          </ul>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="0.5em">
+      <button class="btn btn2" (click)="onCancel()" mat-raised-button>CANCEL</button>
+      <button class="btn btn1" mat-raised-button (click)="startQuiz(quiz)" color="primary">START QUIZ</button>
+    </div>
+  </div>

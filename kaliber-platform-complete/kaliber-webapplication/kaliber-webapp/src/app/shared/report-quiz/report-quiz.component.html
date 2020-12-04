@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Report Quiz</h2>
+<div div fxLayout="column" fxLayoutAlign="space-around none" class="example-container">
+    <form [formGroup]="reportQuiz">
+        <div fxLayout="column" fxLayoutAlign="space-around center">
+            <mat-form-field class="reasonOptions">
+                <mat-select formControlName="reportReason" placeholder="Reasons">
+                    <mat-option *ngFor="let unit of options " [value]="unit.value">{{unit.value}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="testArea">
+                <textarea matInput formControlName="comment" placeholder="Comment"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-dialog-actions align="end">
+                <button mat-button mat-dialog-close>Cancel</button>
+                <button mat-button (click)="onSubmit()" [mat-dialog-close]="true" cdkFocusInitial>Submit</button>
+            </mat-dialog-actions>
+        </div>
+    </form>
+</div>

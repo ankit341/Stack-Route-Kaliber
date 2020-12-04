@@ -1,0 +1,188 @@
+services:
+- name: mongo:latest
+  alias: mongodb
+
+cache:
+  paths:
+    - .m2/repository
+    - node_modules/
+
+variables:
+ DEPLOY_BRANCH: $CI_COMMIT_REF_NAME
+ MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository  -Dorg.slf4j.simpleLogger.showDateTime=true"
+ MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+ MONGO_DATABASE: quizinfo
+ MONGO_URL: mongodb://root:example@mongo:27017/?authSource=admin&authMechanism=SCRAM-SHA-1
+ KARMA: "
+  let defaultConfFile = './karma.conf';
+  const karmaConfig = require(defaultConfFile);
+  module.exports = function(overridedConfig) {
+    reporters = ['progress', 'junit'];
+    browsers = ['ChromeHeadless'];
+    customLaunchers = {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--disable-gpu',
+          '--remote-debugging-port=9222',
+          '--no-sandbox'
+        ],
+      }
+    };
+    junitReporter = {
+      outputDir:  'reports/karma/',
+      outputFile: 'karma-test-result.xml',
+      suite: '',
+      useBrowserName: false,
+    };
+    let mycfg = {
+      set(val) {
+        val.plugins = [
+          require('karma-jasmine'),
+          require('karma-chrome-launcher'),
+          require('karma-jasmine-html-reporter'),
+          require('karma-coverage-istanbul-reporter'),
+          require('@angular-devkit/build-angular/plugins/karma'),
+          require('karma-junit-reporter')
+        ];
+        val.reporters = reporters;
+        val.junitReporter = junitReporter;
+        val.browsers = browsers;
+        val.customLaunchers = customLaunchers;
+        val.singleRun = true;
+        val.browserDisconnectTolerance = 1;
+        val.browserNoActivityTimeout = 50000;
+        overridedConfig.set(val);
+      }
+    };
+    karmaConfig(mycfg);
+  }
+  "
+stages:
+  - build
+  - tests
+  - lint
+  - release
+  - production
+
+# ---------Angular Build
+build_app:
+  # image: circleci/node:latest-browsers
+  image: node:12-alpine
+  stage: build
+  tags:
+    - kaliber_ci_jobs
+  script:
+    - cd kaliber-platform-complete/kaliber-webapplication/kaliber-webapp
+    - npm install
+
+#Spring boot Build
+maven-build:
+  image: maven:3.6.0-jdk-12
+  stage: build
+  tags:
+    - kaliber_ci_jobs
+  script:
+    - cd kaliber-platform-complete
+    - mvn $MAVEN_CLI_OPTS compile
+
+#-----------Angular Test
+karma_unit_tests:
+  # image: circleci/node:latest-browsers
+  image: circleci/node:12-browsers
+  stage: tests
+  tags:
+    - kaliber_ci_jobs
+  when: always
+  before_script:
+    - echo $KARMA > ./karma.config.js
+  tags:
+    - kaliber_ci_jobs
+  script:
+    - cd kaliber-platform-complete/kaliber-webapplication/kaliber-webapp
+    - npm install
+    - npm install --save @angular/material @angular/cdk @angular/animations
+    - npm install --save karma-junit-reporter jasmine-reporters
+    - npm run test -- --watch=false --karma-config=karma.conf.js
+
+#Spring Junit Test
+run-junit-test:
+  image: maven:3.6.0-jdk-12
+  stage: tests
+  tags:
+    - kaliber_ci_jobs
+  when: always
+  script:
+    - cd kaliber-platform-complete/
+    - mvn $MAVEN_CLI_OPTS test
+
+#--------Angular Lint
+tslint_app:
+  # image: circleci/node:latest-browsers
+  image: circleci/node:12-browsers
+  stage: lint
+  tags:
+    - kaliber_ci_jobs
+  when: always
+  tags:
+    - kaliber_ci_jobs
+  script:
+    - cd kaliber-platform-complete/kaliber-webapplication/kaliber-webapp
+    - npm install
+    - npm run lint -- --format json
+
+#Java pmd
+pmd_check:
+  image: maven:3.6.0-jdk-12
+  stage: lint
+  tags:
+    - kaliber_ci_jobs
+  when: always
+  script:
+    - cd kaliber-platform-complete/
+    - mvn $MAVEN_CLI_OPTS pmd:check
+
+#CD stage
+release_deploy:
+    image: ubuntu:latest
+    stage: release
+    tags:
+        - kaliber_ci_jobs
+    before_script: 
+    #generate ssh key   
+        - mkdir -p ~/.ssh     
+        - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
+        - chmod 600 ~/.ssh/id_rsa     
+        - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
+    script:     
+        - ls -ltr
+        - /bin/sh .gitlab-deploy.sh   
+    environment:     
+        name: production     
+        url: http://kaliber-dev.stackroute.io
+    when: on_success
+    only: 
+        - release_040
+
+
+production_deploy:
+    image: ubuntu:latest
+    stage: production
+    tags:
+        - kaliber_ci_jobs
+    before_script: 
+    #generate ssh key   
+        - mkdir -p ~/.ssh     
+        - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
+        - chmod 600 ~/.ssh/id_rsa     
+        - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
+    script:     
+        - ls -ltr
+        - /bin/sh .gitlab-deploy.sh   
+    environment:     
+        name: production     
+        url: http://kaliber-dev.stackroute.io
+    when: manual
+    only: 
+        - master

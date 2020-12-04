@@ -1,0 +1,168 @@
+#scroller {
+    height: 70vh;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.btn {
+    margin-left: -20%;
+    margin-right: 27%;
+}
+
+.spinner {
+    margin-top: 10em;
+}
+
+.displayInfo {
+    margin-right: 6%;
+}
+
+.displayInfo {
+    margin-right: 5%;
+}
+
+.quiz-card {
+    max-width: 370px;
+    padding: 0px;
+    margin: 10px;
+    border: 1em;
+    max-height: 472px;
+}
+
+.mat-button {
+    margin-top: 10px;
+}
+
+.quizTitle {
+    margin-left: 17px;
+}
+
+.image {
+    display: flex;
+    margin-left: -20px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.publishedBy {
+    width: 83%;
+}
+
+.header-color {
+    background-color: #e0dada;
+    padding-top: 10px;
+    /* margin-left: 8px; */
+}
+
+.card-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 7px;
+    /* padding-bottom: 20px; */
+}
+
+.card-icons {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding-right: 7px;
+}
+
+.description-view {
+    max-width: 300px;
+}
+
+.subject-chip {
+    background-color: #e0dada;
+    color: #00acc1;
+}
+
+.icon-flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon-space {
+    size: 30px;
+    font: 30px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.avatar-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-count {
+    padding-top: 16px;
+    padding-left: 4px;
+    font-size: 13px;
+}
+
+.mat-card-actions,
+.mat-card-content,
+.mat-card-subtitle {
+    margin-bottom: 10px;
+}
+
+.avtar {
+    padding-left: 20px;
+    background-color: #dedada;
+    font-weight: bold;
+}
+
+.avatar-icons {
+    display: inline-block;
+    transform: scale(1, 1);
+    padding-left: 35px;
+    /* padding-bottom: 10px; */
+}
+
+.avatar-i {
+    margin-left: -25px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 2.4em;
+    height: 2.4em;
+}
+
+.avatar-i img {
+    width: 50px;
+    height: 50px;
+    transform: scale(1, 1);
+}
+
+
+/* .search-results {
+    height: 100%;
+  } */
+
+.example-header-image {
+    max-width: 70px;
+    max-height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    background-image: url('https://img.icons8.com/color/144/000000/java.png');
+    background-size: cover;
+}
+
+.actionButton {
+    margin-bottom: 15px;
+    margin-left: 129px;
+    margin-right: 35px;
+}
+
+.taken-error {
+    margin-top: 12.5em;
+}

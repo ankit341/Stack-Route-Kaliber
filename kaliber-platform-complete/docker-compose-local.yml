@@ -1,0 +1,29 @@
+version: '3'
+services:
+
+   mongodb:
+      image: mongo:latest
+      restart: on-failure
+      volumes:
+        - $HOME/Documents/kaliberDb:/data/db
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
+      ports:
+        - 27017:27017
+   neo4j:
+      image: neo4j:latest
+      restart: on-failure
+      expose:
+        - 7474
+        - 7687
+      ports:
+       - 7474:7474  #neo4j connection
+       - 7687:7687  #bolt db
+      environment:
+       - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+       - NEO4J_apoc_import_file_enabled=true
+       - NEO4J_dbms_shell_enabled=true
+       - NEO4J_AUTH=none
+      volumes:
+       - $HOME/Videos/kaliberDB/data:/data

@@ -1,0 +1,55 @@
+.example-card {
+  width: 65%;
+  /* box-sizing: border-box; */
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+.example-card-small {
+  
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+
+.example-header-image {
+  /* background-image: url('http://lorempixel.com/150/150/people/'); */
+  background-size: cover;
+  width: 5em;
+  height: 5em;
+}
+.follwerImage{
+border-radius: 50%;
+width: 3em;
+height: 3em;
+padding: 8px;
+}
+
+ .cardAlignment{
+  /* padding: 20px; */
+  margin-top: 20px;
+  width: 100%;
+ 
+}
+.cardTitle {
+  padding-top: 15px;
+}
+
+ .cardalign{
+  padding-left: 30px;
+  /* padding-top: 50px; */
+  /* margin-bottom: 50px; */
+  width: 130%;
+  margin: 40px;
+  border: 1px solid rgba(0,0,0,.09);
+}
+
+/* .custombutton{
+  color: #018f69;
+  float: right;
+  margin-right:5px;
+} */
+
+.mat-card-header-text {
+  margin: 0;
+}

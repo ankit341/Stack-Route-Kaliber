@@ -1,0 +1,40 @@
+<div *ngFor="let dataArr of quesData">
+    <div *ngIf="dataArr.userAnswerContent !==null || dataArr.skipped===true">
+        <mat-card class="quiz-card">
+            <section>
+                <div style="width: 100%">
+                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                        <div>
+                            <!-- <div fxLayout="start stretch">   -->
+                            {{dataArr.question.questionTitle}}
+                            <!-- </div> -->
+                        </div>
+                        <!-- <div fxLayout="row" fxLayoutAlign="end center"> -->
+                        <div>
+                            <mat-icon *ngIf="dataArr.correct" style="color: green">done</mat-icon>
+                            <mat-icon *ngIf="!dataArr.correct" style="color: red">highlight_off</mat-icon>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="concept">
+                    <mat-chip-list>
+                        <p>Concept:</p>
+                        <mat-chip *ngFor="let concept of dataArr.question.concepts.name">{{concept}}
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+            </section>
+            <div>
+                <div *ngIf="dataArr.userAnswerContent ===null">
+                    <p>You skipped this question</p>
+                </div>
+                <div *ngIf="dataArr.userAnswerContent !==null">
+                    <p><strong> Your Answer:
+                        </strong>{{dataArr.userAnswerContent}}</p>
+                </div>
+            </div>
+        </mat-card>
+        <mat-divider></mat-divider>
+    </div>
+</div>

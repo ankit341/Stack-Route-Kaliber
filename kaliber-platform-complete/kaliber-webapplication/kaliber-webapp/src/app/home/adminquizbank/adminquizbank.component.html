@@ -1,0 +1,66 @@
+<div class="spinner" *ngIf="loaded==false">
+    <mat-spinner [diameter]="50"></mat-spinner>
+</div>
+
+<div *ngIf="loaded==true">
+    <mat-toolbar fxLayoutAlign="center center">Quiz Bank</mat-toolbar>
+    <ng-template #elseBlock>
+        <div class="taken-error" fxLayout="column" fxLayoutAlign="">
+            <h3 align="center">There are no quizzes. Go ahead and author a quiz</h3>
+            <button mat-raised-button routerLink="/createquiz" routerLinkActive="active" class="authorBtn" color="primary">Author</button>
+        </div>
+    </ng-template>
+    <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="Active Quizzes">
+            <div *ngIf="count1>0; else elseBlock">
+                <h4 align="right" class="displayInfo">Showing {{activeQuizzes.length}} of {{count1}}</h4>
+            </div>
+
+            <!-- <div *ngFor="let data of activeQuizzes">
+                <app-cards [quiz]="data" [componentName]="adminQuizBank"></app-cards>
+            </div> -->
+            <div infinite-scroll id="scroller" ngxInfiniteScroller (onScrollDown)="onScroll()">
+                <section class="dashboard">
+                    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                        {{errorMsg}}
+                        <div *ngFor="let data of activeQuizzes">
+                            <div fxLayout="row wrap" fxLayoutAlign="space-between center" padding="4px">
+                                <app-cards [quiz]="data" [componentName]="adminQuizBank"></app-cards>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Archived Quizzes">
+            <div *ngIf="count2>0; else elseBlock">
+                <h4 align="right" class="displayInfo">Showing {{archivedQuizzes.length}} of {{count2}}</h4>
+            </div>
+            <div *ngIf="archivedQuizzes.length!=0">
+
+                <div infinite-scroll id="scroller" ngxInfiniteScroller (onScrollDown)="onScroll()">
+                    <section class="dashboard">
+                        <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                            {{errorMsg}}
+                            <div *ngFor="let data of archivedQuizzes">
+                                <div fxLayout="row wrap" fxLayoutAlign="space-between center" padding="4px">
+                                    <app-cards [quiz]="data" [componentName]="adminQuizBank"></app-cards>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+
+                <!-- <div *ngFor="let data of archivedQuizzes">
+                    <app-cards [quiz]="data" [componentName]="adminQuizBank"></app-cards>
+                </div> -->
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+
+
+<!-- class="example-large-box mat-elevation-z4" -->

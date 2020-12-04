@@ -1,0 +1,18 @@
+mat-sidenav-container {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+mat-sidenav {
+    width: auto;
+    /* background-color: lightgray; */
+    position: absolute;
+    width: 15em;
+    padding-top: 0;
+}
+
+mat-toolbar {
+    /* color: black; */
+    position: inherit;
+}

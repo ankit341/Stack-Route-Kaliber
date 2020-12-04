@@ -1,0 +1,137 @@
+.quiz-card {
+    max-width: 300px;
+    min-width: 300px;
+    padding: 0px;
+    margin: 10px;
+    border: 1em;
+}
+
+.subtitle {
+    width: 85%;
+}
+
+.quizTitle {
+    margin-left: 17px;
+}
+
+.image {
+    display: flex;
+    margin-left: -20px;
+}
+
+.mat-button {
+    margin-top: 10px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+
+.header-color {
+    margin-top: 3px;
+    padding-top: 10px;
+}
+
+.card-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 7px;
+    margin-top: 25px;
+}
+
+.card-icons {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding-right: 7px;
+}
+
+.description-view {
+    max-width: 300px;
+}
+
+.icon-flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.icon-space {
+    size: 30px;
+    font: 30px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.avatar-icon {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-icon1 {
+    display: flex;
+    justify-content: center;
+    margin-left: -10%;
+}
+
+.avatar-count {
+    padding-top: 16px;
+    padding-left: 4px;
+    font-size: 13px;
+}
+
+.avtar {
+    padding-top: 20px;
+    padding-left: 2px;
+    margin-left: 15px;
+    margin-top: 1em;
+    background-color: #b2c7f5;
+    font-weight: bold;
+    text-align: center;
+    width: 16%;
+}
+
+.avatar-icons {
+    display: inline-block;
+    transform: scale(1, 1);
+    padding-left: 35px;
+    /* padding-bottom: 10px; */
+}
+
+.avatar-i {
+    margin-left: -25px;
+    position: relative;
+    display: inline-block;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 2.4em;
+    height: 2.4em;
+}
+
+.avatar-i img {
+    width: 50px;
+    height: 50px;
+    transform: scale(1, 1);
+}
+
+.example-header-image {
+    max-width: 70px;
+    max-height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    background-image: url('https://www.seekclipart.com/clipng/middle/87-876167_avatar-michael-jordan-jersey-clip-art-michael-jordan.png');
+    background-size: cover;
+}
+
+.nav-icon {
+    color: rgb(117, 117, 117);
+}
+
+.fav-icon {
+    color: rgb(117, 117, 117);
+    font-size: 28px;
+    margin-left: 10px;
+    margin-bottom: 13px;
+}

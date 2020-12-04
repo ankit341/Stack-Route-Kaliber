@@ -1,0 +1,79 @@
+.scroller {
+    height: 76vh;
+    width: 98%;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.toolbar {
+    margin-bottom: 20px;
+}
+
+.mat-card {
+    padding: 5px 20px;
+}
+
+.question-card {
+    width: 75%;
+    margin-top: 10px;
+}
+
+.question-type {
+    padding-bottom: 5px;
+    padding-left: 2px;
+}
+
+.icon-text {
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
+$mat-card-header-size: 60px !default;
+.mat-card-avatar {
+    height: $mat-card-header-size;
+    width: $mat-card-header-size;
+    border-radius: 60%;
+    flex-shrink: 0;
+    border: 3px solid;
+    object-fit: cover;
+}
+
+.chip {
+    margin-left: 2.6em;
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+.addURL-fab-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 100;
+    margin: 0;
+}
+
+.check {
+    border: solid 1px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+}
+
+.mat-card-avatar p {
+    margin-left: .7em;
+    padding-top: 4px;
+}
+
+.question-icon {
+    display: flex;
+}

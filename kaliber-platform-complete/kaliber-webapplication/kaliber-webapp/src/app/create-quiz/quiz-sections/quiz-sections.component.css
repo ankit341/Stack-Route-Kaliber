@@ -1,0 +1,54 @@
+.form-app>* {
+    width: 100%;
+}
+
+.mat-button {
+    margin: 2px;
+}
+.deleteQuestion {
+    margin-right: 1.5em;
+}
+/* .mychanges {
+    margin-top:1em;
+    margin-left: 2em;
+    margin-right: 2em;
+} */
+
+.fields {
+    justify-content: space-between;
+}
+
+.max-score {
+    justify-content: space-around;
+}
+
+.section-button {
+    justify-content: space-around;
+    margin-top: 1%;
+    margin-bottom: 5px;
+}
+
+.section-title {
+    width: 15em;
+    margin-bottom: -10px;
+}
+
+.quiz-title {
+    justify-content: space-between;
+    width: 25em;
+}
+
+mat-form-field {
+    width: 48%;
+}
+
+.quiz-icons {
+    margin-right: 1%;
+    margin-left: 1%;
+}
+.sectionquestions {
+    margin-bottom: 1em;
+}
+.sectionCard{
+    margin-bottom: 5px;
+}

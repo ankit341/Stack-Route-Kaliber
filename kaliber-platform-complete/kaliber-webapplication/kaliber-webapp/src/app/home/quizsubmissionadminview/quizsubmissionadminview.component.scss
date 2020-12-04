@@ -1,0 +1,85 @@
+#scroller {
+  height: 64vh;
+  width: 100%;
+  overflow: scroll;
+  padding: 0;
+  margin: 0px;
+  list-style: none;
+  overflow-x: hidden;
+}
+
+h2 {
+  color: black;
+  text-align: center;
+}
+
+.mat-card-content>:last-child:not(.mat-card-footer),
+.mat-card>:last-child:not(.mat-card-footer) {
+  margin-bottom: 0;
+
+}
+
+.example-header-image {
+  background-size: cover;
+  height: 4.5em;
+  width: 4.5em;
+  background-color: #878a8cb3;
+}
+
+.cardalign {
+  width: 62%;
+  border: 1px solid rgba(0, 0, 0, .09);
+  margin-bottom: 12px;
+}
+
+.custombutton {
+  float: right;
+  margin-right: 5px;
+  background-color: #b9a1a1;
+  width: 71px;
+  text-align: center;
+  height: 29px;
+  border-radius: 25px;
+}
+
+.mat-card-header .mat-card-title {
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.mat-card-header .mat-card-subtitle:not(:first-child) {
+  color: #444343;
+  padding-top: 4px;
+
+}
+
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+  background-color: #878a8cb3;
+  color: #fff;
+  font-size: 23px;
+  padding-left: 19px;
+}
+
+.spinner {
+  margin-left: 46%;
+  margin-top: 31%;
+}
+
+.name {
+  margin-left: -1px;
+  font-size: 34px;
+  color: white;
+  font-weight: 550;
+  margin-top: -3px;
+  text-align: center;
+}
+
+.count {
+  margin-right: 6%;
+  margin-bottom: 10px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  margin: 5px 2px;
+  box-shadow: 0 2px 2px -1px #878a8cb3, 0 1px 1px 0 #878a8cb3, 0 1px 3px 0 #878a8cb3;
+}

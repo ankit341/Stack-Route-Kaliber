@@ -1,0 +1,168 @@
+<mat-toolbar fxLayoutAlign="center center">Author Quiz</mat-toolbar>
+<div>
+    <div class="quizCard">
+        <mat-card class="example-card" fxLayoutGap="8px" fxLayout="column" fxFlexAlign="center" fxFlexFill [class.mat-elevation-z13]="!isActive" [class.mat-elevation-z7]="isActive">
+            <form class="form-app" [formGroup]="createQuiz">
+                <div fxLayout="row wrap" fxLayoutAlign="space-between">
+
+
+                    <mat-form-field fxFlex="100%" fxFlex.gt-sm="45%">
+                        <mat-label>Quiz Title</mat-label>
+                        <input matInput #input1 maxlength="22" placeholder="Quiz Title" formControlName="title">
+                        <mat-hint align="end">{{input1.value?.length || 0}}/22</mat-hint>
+
+                    </mat-form-field>
+
+                    <!-- hintLabel="Max 10 characters" -->
+                    <mat-form-field hintLabel="Max 10 characters" fxFlex="100%" fxFlex.gt-sm="45%">
+                        <input matInput #input maxlength="10" placeholder="Enter Quiz Code" formControlName="quizCode">
+                        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+                        <!-- <mat-error *ngIf="createQuiz.controls.quizCode.errors.minlength.actualLength &lt createQuiz.controls.quizCode.errors.minlength.requiredLength">
+                                Please enter quizcode of 10 characters.
+                            </mat-error> -->
+                        <mat-error *ngIf="createQuiz.status=='INVALID'">
+                            Please Enter unique Quiz Code with alpha or numeric values of 10 characters
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="fields" fxLayout="row wrap" fxLayoutAlign="space-between">
+
+                    <mat-form-field class="form-quiz" fxFlex="100%" fxFlex.gt-sm="45%">
+                        <mat-label>Quiz Type</mat-label>
+                        <mat-select formControlName="quizType">
+                            <mat-option *ngFor="let type of quizType" [value]="type">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+                    <mat-form-field class="form-quiz" fxFlex="100%" fxFlex.gt-sm="45%">
+                        <mat-label>Proficiency Level</mat-label>
+                        <mat-select formControlName="proficiency">
+                            <mat-option *ngFor="let proficiency of proficiencies" [value]="proficiency">
+                                {{proficiency}}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+
+                </div>
+                <mat-form-field hintLabel="Max 300 characters">
+                    <input matInput #input2 maxlength="300" placeholder="Enter Quiz Description" formControlName="description">
+                    <mat-hint align="end">{{input2.value?.length || 0}}/300</mat-hint>
+                </mat-form-field>
+
+
+                <div class="mat-input-wrapper">
+                    <mat-tab-group>
+
+                        <mat-tab class="lable-width" label=Write>
+                            <mat-form-field class="example-full-width">
+                                <textarea matInput placeholder="Enter Quiz Instructions [Mark-down Supported]" class="variable-textarea" formControlName="quizInstructions" [(ngModel)]="markdown"></textarea>
+                            </mat-form-field>
+                        </mat-tab>
+                        <mat-tab class="lable-width" label="Preview">
+                            <markdown class="variable-binding" [(data)]="markdown"></markdown>
+
+                        </mat-tab>
+
+                    </mat-tab-group>
+                </div>
+
+
+
+
+                <!-- <div fxLayoutAlign="space-between center">
+                    <mat-slide-toggle class="example-margin" (change)="onChangeWager($event)">
+                        Allow Wager:
+                    </mat-slide-toggle>
+                </div>
+
+                <div *ngIf="wager">
+                    <button mat-raised-button color="primary" class="preview-button" (click)="addItem()">Add
+                        Label</button>
+                    <div fxLayout="row-wrap" fxLayoutGap="2%" formArrayName="confidence" fxLayourAlign="space-between"
+                        *ngFor="let creds of createQuiz.get('confidence')['controls']; let i = index">
+                        <div [formGroupName]="i" width="100%">
+                            <mat-form-field class="confidenceLabels">
+                                <input matInput placeholder="label" formControlName="label">
+                            </mat-form-field>
+                            <mat-form-field class="confidenceLabels">
+                                <input matInput placeholder="Bonus Score" formControlName="bonusScore">
+                            </mat-form-field>
+                            <mat-form-field class="confidenceLabels">
+                                <input matInput placeholder="Penalty Score" formControlName="penaltyScore">
+                            </mat-form-field> -->
+                <div class="fields" fxLayout="row wrap" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="100%" fxFlex.gt-sm="45%">
+                        <input matInput placeholder="Subject" formControlName="subject">
+                    </mat-form-field>
+                    <mat-form-field hintLabel="Integer values" fxFlex="100%" fxFlex.gt-sm="45%">
+                        <input matInput placeholder="Points of Quiz" formControlName="points">
+                        <mat-error *ngIf="createQuiz.controls.points.status=='INVALID'">
+                            You don't have that much points in account to create quiz. Try giving points less than {{previousPoints}}
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="space-between center">
+                    <mat-slide-toggle class="example-margin" (change)="onChangeWager($event)">
+                        Confidence Meter
+                    </mat-slide-toggle>
+                </div>
+
+                <div *ngIf="wager">
+                    <button mat-raised-button color="primary" class="preview-button" (click)="addItem()">Add
+                        Label</button>
+                    <div class="fields" fxLayout="row wrap" fxLayoutAlign="space-between" formArrayName="confidence" *ngFor="let creds of createQuiz.get('confidence')['controls']; let i = index">
+                        <div [formGroupName]="i" class="fields" fxLayout="row wrap" fxLayoutAlign="space-between">
+                            <mat-form-field fxFlex="100%" fxFlex.gt-xs="27%">
+                                <input matInput placeholder="label" formControlName="label">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="100%" fxFlex.gt-xs="27%">
+                                <input matInput placeholder="Bonus Score" formControlName="bonusScore">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="100%" fxFlex.gt-xs="27%">
+                                <input matInput placeholder="Penalty Score" formControlName="penaltyScore">
+                                <span matPrefix>-&nbsp;</span>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+
+
+
+                <!-- <mat-slide-toggle class="example-margin">
+                        Quiz Schedule!
+                    </mat-slide-toggle> -->
+
+
+                <mat-slide-toggle class="example-margin" (change)="onChangePreferences($event)">
+                    Preferences
+                </mat-slide-toggle>
+                <div class="fields" fxLayout="row wrap" *ngIf="preferences==true">
+                    <mat-checkbox fxFlex="100%" fxFlex.gt-xs="27%" [checked]="hint" (change)="hint = !hint">Show Hints
+                    </mat-checkbox>
+                    <mat-checkbox fxFlex="100%" fxFlex.gt-xs="27%" [checked]="feedback" (change)="feedback = !feedback">
+                        Explain Feedback
+                    </mat-checkbox>
+                    <mat-checkbox fxFlex="100%" fxFlex.gt-xs="27%" [checked]="showAnswers" (change)="showAnswers = !showAnswers">
+                        Show Answers
+                    </mat-checkbox>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>
+
+<!-- *ngIf="edit=='false'" -->
+<div *ngIf="edit==false" class="quiz-section">
+    <app-quiz-sections (questionsAndSection)="showMessage($event)" (maxSequence)="showSequence($event)"></app-quiz-sections>
+</div>
+
+<div class="previewBtn" fxFlexAlign="center" fxLayoutAlign="center bottom">
+    <button mat-raised-button color="primary" class="preview-button" [disabled]="!createQuiz.valid" (click)="onSubmit()">Preview</button>
+</div>

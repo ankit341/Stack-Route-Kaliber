@@ -1,0 +1,28 @@
+<div class="spinner" *ngIf="loaded==false" fxLayout="column" fxLayoutAlign="center center">
+    <mat-spinner [diameter]="50"></mat-spinner>
+    <h3>Loading please wait..</h3>
+</div>
+<div *ngIf="loaded==true">
+    <mat-toolbar fxLayoutAlign="center center">Authored Quizzes</mat-toolbar>
+    <div *ngIf="count>0; else elseBlock">
+        <h4 align="right" class="displayInfo">Showing {{quizzes.length}} of {{count}}</h4>
+    </div>
+    <ng-template #elseBlock>
+        <div class="taken-error" fxLayout="column" fxLayoutAlign="center center">
+            <h3>You have not authored any quizzes. Go ahead and author a quiz</h3>
+            <button mat-raised-button routerLink="/createquiz" routerLinkActive="active" color="primary">Author</button>
+        </div>
+    </ng-template>
+    <section class="dashboard">
+        <div infinite-scroll id="scroller" ngxInfiniteScroller (onScrollDown)="onScroll()">
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                {{errorMsg}}
+                <div *ngFor="let data of quizzes">
+                    <div fxLayout="row wrap" fxLayoutAlign="space-between center" padding="4px">
+                        <app-cards [quiz]="data" [componentName]="createdQuizzes"></app-cards>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

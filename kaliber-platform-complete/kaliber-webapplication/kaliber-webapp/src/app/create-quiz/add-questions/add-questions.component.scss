@@ -1,0 +1,98 @@
+.searchbar {
+    margin-left: 100%;
+}
+
+.searchForm {
+    // margin-left: 30%;
+    width: 60%;
+}
+
+.formSearch {
+    // margin-right: 30%;
+    width: 60%;
+}
+
+.panelTitle {
+    height: 22px;
+}
+
+.searchBtn {
+    margin-left: 8%;
+}
+
+.create-question-button {
+    margin-top: 1em;
+}
+
+.question-panel {
+    margin-bottom: 1em;
+}
+
+#mybutton {
+    position: fixed;
+    bottom: 10px;
+    right: 13%;
+}
+
+.addIcon {
+    margin-top: -384%;
+    margin-left: -222%;
+    font-size: 55px;
+}
+
+.sticky {
+    // position: -webkit-sticky;
+    // position: sticky;
+    // bottom: 0;
+    padding: 28px;
+    font-size: 40px;
+    margin-right: 10px;
+}
+
+.icon-flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.scrollWrapper {
+    overflow: auto;
+    height: 400px;
+}
+
+.scrollContent {
+    min-height: 390px;
+}
+
+#scroller {
+    height: 24rem;
+    width: 100%;
+    overflow: auto;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.spinner {
+    margin-left: 40%;
+    margin-top: 40%;
+}
+
+.checkbox {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.correct {
+    background-color: aqua;
+}
+
+.icon-space {
+    size: 30px;
+    font: 30px;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.mat-expanded mat-panel-title {
+    display: none;
+}

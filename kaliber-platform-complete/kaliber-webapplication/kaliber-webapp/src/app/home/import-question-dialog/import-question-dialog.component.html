@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label for="file">Choose a file to upload</label>
+  <input type="file" id="file" accept=".csv" (change)="handleFileSelect($event)">
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()">No Thanks</button>
+</div>

@@ -1,0 +1,145 @@
+<!-- <app-header></app-header>   -->
+<!-- <p style="margin-bottom:0px;">{{ errorMsg }}</p> -->
+
+<mat-toolbar fxLayoutAlign="center center">PROFILE</mat-toolbar>
+<div fxLayout="row " fxLayoutAlign="space-around center" fxHide fxShow.gt-sm>
+  <mat-card class="example-card">
+    <mat-card-header fxLayout="row-reverse" fxLayout.xs="column" fxLayoutAlign="space-between center">
+      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image':userProfileAvatarUrl}">
+      </div>
+      <mat-card-title style="padding-top:15px">{{userDetails.name}}</mat-card-title>
+      <mat-card-subtitle>{{userDetails.email}}</mat-card-subtitle>
+
+      
+      <mat-card-subtitle style="margin-left: -18px; float: left;" ><span class="iconify" style="width: 4em;
+        height: 1.3em;" data-icon="whh:coins" data-inline="false"></span>{{userDetails.totalPoints | number: '1.0-0'}} points</mat-card-subtitle>
+
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="{{followTopicsCount}} Topics">
+          <mat-card *ngIf="userDetails.followedTopics!=null">
+            <mat-chip-list>
+              <mat-chip *ngFor="let topics of userDetails.followedTopics" class="chips">{{topics}}
+                <mat-icon (click)="toRemoveTopic(topics)" matChipRemove *ngIf="removable">cancel
+                </mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card>
+        </mat-tab>
+
+        <mat-tab label="{{followersCount}} Followers">
+
+          <div fxLayout="row wrap" fxLayoutAlign="space-around start" style="margin:0"
+            *ngIf="userDetails.followers!=null">
+            <mat-card class="cardAlignment" *ngFor="let follower of followerDetails">
+              <mat-card-header style="margin-left: -35px">
+                <img class="follwerImage" src={{follower.imageURL}} alt="Avatar">
+                <div style="padding: 9px" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-around start">
+                  <mat-card-title color="primary" selected>{{follower.name}}</mat-card-title>
+                  <mat-card-subtitle>{{follower.name}} has points {{follower.points | number: '1.0-0'}}
+                  </mat-card-subtitle>
+                </div>
+              </mat-card-header>
+            </mat-card>
+          </div> ​
+        </mat-tab>
+
+        <mat-tab label="{{usersFollowingCount}} Following">
+          <div fxLayout="row wrap" fxLayoutAlign="space-around start" style="margin:0"
+            *ngIf="userDetails.usersFollowing!=null">
+            <mat-card class="cardAlignment" *ngFor="let following of followingDetails">
+              <mat-card-header style="margin-left: -35px">
+                <img class="follwerImage" src={{following.imageURL}} alt="Avatar">
+                <div style="padding: 9px" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-around start">
+                  <mat-card-title color="primary" selected>{{following.name}}</mat-card-title>
+                  <mat-card-subtitle>{{following.name}} has points {{following.points | number: '1.0-0'}}
+                  </mat-card-subtitle>
+                </div>
+              </mat-card-header>
+            </mat-card>
+          </div>
+          <!-- </div> -->
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div fxShow fxHide.gt-sm>
+  <mat-card class="example-card-small">
+    <mat-card-header fxLayout="row-reverse" fxLayoutAlign="space-between center" fxLayout.xs="column">
+
+      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image':userProfileAvatarUrl}">
+      </div>
+      <div fxLayout="column" fxLayoutAlign="space-between center">
+        <mat-card-title style="padding-top:15px">{{userDetails.name}}</mat-card-title>
+        <mat-card-subtitle>{{userDetails.email}}</mat-card-subtitle>
+        <div fxLayout="column" fxLayoutAlign="start start">
+          
+            <mat-card-subtitle><span class="iconify" style="width: 4em;
+                height: 1.3em;" data-icon="whh:coins" data-inline="false"></span>{{userDetails.totalPoints | number: '1.0-0'}} points</mat-card-subtitle>
+
+        </div>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="{{followTopicsCount}}Topics">
+          <mat-card *ngIf="userDetails.followedTopics!=null">
+            <mat-chip-list>
+              <mat-chip *ngFor="let topics of userDetails.followedTopics" class="chips">{{topics}}
+                <mat-icon (click)="toRemoveTopic(topics)" matChipRemove *ngIf="removable">cancel
+                </mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card>
+        </mat-tab>
+
+
+        <mat-tab label="{{followersCount}}Followers">
+
+          <div fxLayout="row wrap" fxLayoutAlign="space-around start" style="margin:0"
+            *ngIf="userDetails.followers!=null">
+
+            <mat-card class="cardAlignment" *ngFor="let follower of followerDetails">
+              <mat-card-header style="margin-left: -35px">
+                <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutWrap>
+                  <img class="follwerImage" src={{follower.imageURL}} alt="Avatar">
+                  <div style="padding: 3px" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-around start">
+                    <mat-card-title color="primary" selected>{{follower.name}}</mat-card-title>
+                    <mat-card-subtitle> {{follower.name}} has points {{follower.points | number: '1.0-0'}}
+                    </mat-card-subtitle>
+                  </div>
+                </div>
+              </mat-card-header>
+            </mat-card>
+
+          </div> ​
+        </mat-tab>
+
+        <mat-tab label="{{usersFollowingCount}}Following">
+          <div fxLayout="row wrap" fxLayoutAlign="space-around start" style="margin:0"
+            *ngIf="userDetails.usersFollowing!=null">
+
+            <mat-card class="cardAlignment" *ngFor="let following of followingDetails">
+              <mat-card-header style="margin-left: -35px">
+                <div fxLayout="row wrap" fxLayoutAlign="space-around start" fxLayoutWrap>
+                  <img class="follwerImage" src={{following.imageURL}} alt="Avatar">
+                  <div style="padding: 3px" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-around start">
+                    <mat-card-title color="primary" selected> {{following.name}}</mat-card-title>
+                    <mat-card-subtitle> {{following.name}} has points {{following.points | number: '1.0-0'}}
+                    </mat-card-subtitle>
+                  </div>
+                </div>
+              </mat-card-header>
+            </mat-card>
+
+          </div> ​
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,59 @@
+{{errorMsg}}
+<div class="scrollWrapper">
+    <div class="scrollContent">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Quiz Title : {{data.quiz.title}}</mat-card-title>
+                <mat-card-subtitle>Quiz Code : {{data.quiz.quizCode}}</mat-card-subtitle>
+                <mat-card-subtitle>Quiz Type : {{data.quiz.quizType}}</mat-card-subtitle>
+                <mat-card-subtitle>Proficiency : {{data.quiz.proficiency}}</mat-card-subtitle>
+                <mat-card-subtitle>Subject : {{data.quiz.subject}}</mat-card-subtitle>
+                <mat-card-subtitle>Points : {{data.quiz.points}}</mat-card-subtitle>
+
+            </mat-card-header>
+        </mat-card>
+
+        <section *ngFor="let i of data.quiz.section">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Section : {{i.sectionTitle}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content fxLayout="column" fxLayoutGap="0.8em">
+                    <section *ngFor="let j of i.questions;let m=index" fxLayout="column" fxLayoutGap="0.5em">
+                        <mat-card-title>{{m+1}}) {{j.questionTitle}}</mat-card-title>
+                        <span class="content"><markdown [data]="j.questionContent"></markdown></span>
+                        <section fxLayout="column" fxLayoutGap="0.3em" *ngIf='j.questionType=="MCQ"'>
+                            <div *ngFor="let z of j.answerOptions">
+                                <div *ngIf="z.optionContent==j.answerKeys[0]; else elseblock">
+                                    <mat-radio-group>
+                                        <mat-radio-button [checked]="true" (click)="my()">{{z.optionContent}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <ng-template #elseblock>
+                                    <mat-radio-button (click)="my()">{{z.optionContent}}</mat-radio-button>
+                                </ng-template>
+                            </div>
+                        </section>
+                        <section fxLayout="column" fxLayoutGap="0.3em" *ngIf="j.questionType=='MMCQ'">
+                            <div *ngFor="let z of j.answerOptions">
+                                <div *ngIf="z.checked==true; else elseblock">
+                                    <mat-checkbox [checked]="true" (click)="my()">{{z.optionContent}}</mat-checkbox>
+                                </div>
+                                <ng-template #elseblock>
+                                    <mat-checkbox (click)="my()">{{z.optionContent}}</mat-checkbox>
+                                </ng-template>
+                            </div>
+                        </section>
+                    </section>
+                </mat-card-content>
+            </mat-card>
+        </section>
+    </div>
+</div>
+<div fxLayoutAlign="end" fxLayoutGap="10px">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button *ngIf="edit==false" mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+    <button *ngIf="edit==true" mat-raised-button color="primary" (click)="onEdit()">Update</button>
+
+</div>

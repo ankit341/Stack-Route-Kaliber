@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "server.ribbon.listOfServers",
+    "type": "java.lang.String",
+    "description": "A description for 'server.ribbon.listOfServers'"
+  },
+  {
+    "name": "kaliber-quiz-inventory.ribbon.listOfServers",
+    "type": "java.lang.String",
+    "description": "A description for 'kaliber-quiz-inventory.ribbon.listOfServers'"
+  }
+]}

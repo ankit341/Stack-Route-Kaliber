@@ -1,0 +1,76 @@
+.optionText {
+    font-size: 1.11em;
+    margin-bottom: 1em;
+    color: black;
+    /* padding: 0.6em 0.6em 0 0.6em; */
+}
+
+.question {
+    /* text-align: left; */
+    font-size: 1.5em;
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+.timer {
+    /* text-align: right; */
+    font-size: 1.5em;
+}
+
+.timer_icon {
+    font-weight: 600;
+}
+
+.skip {
+    font-size: 0.9em;
+    margin-top: 0.2em;
+}
+
+.quizContainer {
+    margin: 1em;
+}
+
+.confidence {
+    padding: 0.5em;
+    border: 0.5px solid lightgrey;
+}
+
+.btn1 {
+    color: grey;
+}
+
+.btn3 {
+    color: #03a9f4;
+}
+
+.qnum {
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+.sheet {
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+.concept {
+    margin: 0.5em;
+    /* border-color: blue; */
+}
+
+.content {
+    margin: 0.5em;
+    padding: o.5em;
+}
+
+.iconify {
+    background: url('https://api.iconify.design/el:flag-alt.svg') no-repeat center center / contain;
+}
+
+.finishQuiz {
+    margin-bottom: 1em;
+}
+
+.spinner {
+    margin-top: 10em;
+}

@@ -1,0 +1,184 @@
+<!-- <mat-toolbar fxLayoutAlign="center">
+    <div>Quiz Feed</div>
+    <div fxLayoutAlign="end">
+        <button mat-flat-button style="background-color: whitesmoke;" (click)='opendrawer()'><h4>Notifications</h4></button>
+    </div>
+</mat-toolbar>
+<section fxLayout="row" fxLayoutAlign="center center" class="quiz-section">
+    <section class="quiz-feed">
+        <div class="spinner" *ngIf="loaded==false" fxLayout="column" fxLayoutAlign="center center">
+            <mat-spinner [diameter]="50"></mat-spinner>
+            <h3>Your personalised quizzes are being loaded</h3>
+
+         </div> -->
+
+
+
+
+
+
+<!-- <div *ngIf="loaded==true">
+  <div *ngIf="count>0; else elseBlock">
+    <h4 align="right" class="displayInfo">Showing {{quizzes.length}} of {{count}}</h4>
+  </div>
+  <ng-template #elseBlock>
+    <div class="taken-error" fxLayout="column" fxLayoutAlign="center center">
+      <h3 align="center">We will be back with exciting quizzes very soon. By then, why don't you create one</h3>
+      <button mat-raised-button routerLink="/createquiz" routerLinkActive="active" color="primary">Author</button>
+    </div>
+  </ng-template>
+  <div infinite-scroll id="scroller" ngxInfiniteScroller (onScrollDown)="onScroll()">
+    <section class="dashboard">
+      <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+        {{errorMsg}}
+        <div *ngFor="let data of quizzes">
+          <div fxLayout="row wrap" fxLayoutAlign="space-around start" padding="4px">
+            <app-cards [quiz]="data" [componentName]="dashboard"></app-cards>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div> -->
+
+
+
+
+
+
+<!-- <section fxShow.lt-sm="false" fxShow.gt-md="false" fxShow.lt-md="false" fxShow.lg="true" fxShow="true" class="feed" fxFlex="20%">
+            <div fxShow.lt-sm="false" fxShow.gt-md="false" fxShow.lt-md="false" fxShow.lg="true" fxShow="true" *ngIf="loaded==true">
+                <mat-toolbar class="feed-tool" fxLayoutAlign="center center" style="max-height: 53px">Notifications</mat-toolbar>
+                <app-activity-feed></app-activity-feed>
+            </div>
+        </section> -->
+
+
+
+
+
+
+
+
+<!-- <ng-sidebar-container style="height: 100vh;">
+  <ng-sidebar [(opened)]="opened" position="right">
+    <div fxLayoutAlign="space-between">
+      <h3>Notifications</h3>
+      <mat-icon (click)="_toggleOpened()" style="margin-top: 18px;cursor: pointer;">clear</mat-icon>
+    </div>
+    <app-activity-feed></app-activity-feed>
+
+  </ng-sidebar>
+  <div ng-sidebar-content>
+    <mat-toolbar fxLayout="row">
+      <div fxLayoutAlign="end end" fxFlex="50%">
+        Quiz Feed
+      </div>
+      <div fxLayoutAlign="end end" fxFlex="50%">
+        <button mat-icon-button matTooltip="Notifications" (click)="_toggleSidebar()">
+          <mat-icon class="notif-icon">notifications</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div>
+      <div class="spinner" *ngIf="loaded==false" fxLayout="column" fxLayoutAlign="center center">
+        <mat-spinner [diameter]="50"></mat-spinner>
+        <h3>Your personalised quizzes are being loaded</h3>
+      </div>
+      <div *ngIf="loaded==true">
+        <div *ngIf="count>0; else elseBlock">
+          <h4 align="right" class="displayInfo">Showing {{quizzes.length}} of {{count}}</h4>
+        </div>
+        <ng-template #elseBlock>
+          <div class="taken-error" fxLayout="column" fxLayoutAlign="center center">
+            <h3 align="center">We will be back with exciting quizzes very soon. By then, why don't you create one</h3>
+            <button mat-raised-button routerLink="/createquiz" routerLinkActive="active" color="primary">Author</button>
+          </div>
+        </ng-template>
+        <div infinite-scroll id="scroller" ngxInfiniteScroller (onScrollDown)="onScroll()">
+          <section class="dashboard">
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+              {{errorMsg}}
+              <div *ngFor="let data of quizzes">
+                <div fxLayout="row wrap" fxLayoutAlign="space-between" padding="4px">
+                  <app-cards [quiz]="data" [componentName]="dashboard"></app-cards>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-sidebar-container> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-sidebar-container style="height: 100vh;">
+  <ng-sidebar [(opened)]="opened" position="right">
+    <div fxLayoutAlign="space-between">
+      <h3>Notifications</h3>
+      <mat-icon (click)="_toggleOpened()" style="margin-top: 18px;cursor: pointer;">clear</mat-icon>
+    </div>
+    <app-activity-feed></app-activity-feed>
+
+  </ng-sidebar>
+  <div ng-sidebar-content>
+    <mat-toolbar fxLayout="row">
+      <div fxLayoutAlign="end end" fxFlex="50%">
+        Quiz Feed
+      </div>
+      <div fxLayoutAlign="end end" fxFlex="50%">
+        <button mat-icon-button matTooltip="Notifications" (click)="_toggleSidebar()">
+          <mat-icon class="notif-icon">notifications</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <div>
+      <div class="spinner" *ngIf="loaded==false" fxLayout="column" fxLayoutAlign="center center">
+        <mat-spinner [diameter]="50"></mat-spinner>
+        <h3>Your personalised quizzes are being loaded</h3>
+      </div>
+      <div *ngIf="loaded==true">
+        <div *ngIf="count>0; else elseBlock">
+          <h4 align="right" class="displayInfo">Showing {{myQuizArray.length}} of {{count}}</h4>
+        </div>
+      </div>
+      <div> 
+        <ng-template #elseBlock>
+          <div class="taken-error" fxLayout="column" fxLayoutAlign="center center">
+            <h3 align="center">We will be back with exciting quizzes very soon. By then, why don't you create one</h3>
+            <button mat-raised-button routerLink="/createquiz" routerLinkActive="active" color="primary">Author</button>
+          </div>
+        </ng-template>
+        <div infinite-scroll id="scroller" ngxInfiniteScroller (onScrollDown)="onScroll()">
+          <section class="dashboard">
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+              {{errorMsg}}
+              <div *ngFor="let data of myQuizArray">
+                <div fxLayout="row wrap" fxLayoutAlign="space-between" padding="4px">
+                  <app-cards [quiz]="data" [componentName]="dashboard"></app-cards>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-sidebar-container>

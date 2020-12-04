@@ -1,0 +1,14 @@
+.mat-card-header .mat-card-subtitle:not(:first-child) {
+    margin-top: 0px;
+}
+.correct{
+    background-color: aqua;
+}
+.scrollWrapper {
+    overflow: auto;
+    height: 490px;
+}
+
+.scrollContent {
+    min-height: 390px;
+}
